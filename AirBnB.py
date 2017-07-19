@@ -239,12 +239,16 @@ for c in range(len(CONSULTA)):
     #---
     position = 1 #<--- Posición de los resultados (1,2,3,4,5) ---TODO--- considerar el uso de un arreglo para almacenar todos los resultados.
     #---
+    ALLOW_RESET = False
     S_PROGRAM = False    
     #---
     is_date = False #<---- Variable para verificar que la consulta tiene una fecha programada.
     if(CONSULTA[c][11] != None):        
-        if ((CONSULTA[c][11]).date() == td):
+        if ((CONSULTA[c][11]).date() < (CONSULTA[c][10]).date()):
             is_date = True
+        elif((CONSULTA[c][11]).date() >= (CONSULTA[c][10]).date()):
+            is_date = False
+            ALLOW_RESET = True
         else:
             is_date = False
     #---
@@ -261,8 +265,13 @@ for c in range(len(CONSULTA)):
         BODY = '/homes?' #<--- ADD & TO ADULTS.
         ADULT = CONSULTA[c][5]
         BODY2 = '&allow_override[]='
-        CHECKIN = datetime.datetime.now()
-        CHECKOUT = CHECKIN + datetime.timedelta(days=2)
+        if (is_date == True):
+            CHECKIN = (CONSULTA[c][11]).date()
+            CHECKOUT = CHECKIN + datetime.timedelta(days=CONSULTA[c][9])
+        else:
+            CHECKIN = datetime.datetime.now()
+            CHECKOUT = CHECKIN + datetime.timedelta(days=CONSULTA[c][9])
+        #---
         CHILDREN = CONSULTA[c][6] #<--- MAX 12.
         INFANTS = CONSULTA[c][7] #<--- MAX TWO.
         GUESTS = ADULT + CHILDREN
@@ -791,7 +800,7 @@ for c in range(len(CONSULTA)):
             own_id = None #<--- Almacena el Id de los anuncios propia.
             #--- COMPARACIÓN DE ANUNCIO
             for itera in range(len(NAME)):
-                #---
+                #---and A_LINK[itera] == L_LINK[i]
                 if (str.lower(NAME[itera]) == str.lower(L_NAME[i]) and str.lower(KIND[itera]) == str.lower(L_KIND[i])):
                     own_id = ID[itera] #<--- ID.
                 #---
@@ -855,7 +864,31 @@ for c in range(len(CONSULTA)):
     #---
         print('Error -> El tamaño de la lista de los elementos a ingresar a la BD, No Son iguales.')
     print("------------------------------------------------")
-    if(S_PROGRAM == True and CONSULTA[c][11] != None):
+    if(S_PROGRAM == True and ALLOW_RESET  == True):
+        #---  
+        t_day = datetime.datetime.now()      
+        f_schedule = t_day + datetime.timedelta(days=(CONSULTA[c][9])) #<--- se aumenta en el rango de días que asigna la consulta la proxima fecha en la que se ejecutara la consulta.
+        #--- 
+        try:
+        #---
+            with connection.cursor() as cursor:
+                sql = "UPDATE SCR_CONSULTAS SET FECHA_PROGRA = %s WHERE ID_CONSULTA = %s"
+                cursor.execute(sql,(f_schedule.date(),CONSULTA[c][0]))
+                insert_log((CONSULTA[c][0]),'Se ha modificado la fecha en que se ejecutara nuevamente el script.',('proxima fecha: ' + str(f_schedule)),'196-210','',1) #tipo 0= error, 1= bien, 2= advertencia
+                print('Correcto -> Se ha modificado la fecha en que se ejecutara nuevamente el script.')
+            #---
+                connection.commit()
+            #---
+        except _mssql.MssqlDatabaseException as e:
+            print('Error# -> Número de error: ',e.number,' - ','Severidad: ', e.severity)
+    #---
+    elif (S_PROGRAM == True and ALLOW_RESET  == False):
+        #---
+        t_day = None    
+        if(CONSULTA[c][11] != None):
+            t_day = CONSULTA[c][11]
+        else:
+            t_day = datetime.datetime.now()
         #---
         f_schedule = CONSULTA[c][11] + datetime.timedelta(days=(CONSULTA[c][9])) #<--- se aumenta en el rango de días que asigna la consulta la proxima fecha en la que se ejecutara la consulta.
         #--- 
