@@ -890,7 +890,7 @@ for c in range(len(CONSULTA)):
         else:
             t_day = datetime.datetime.now()
         #---
-        f_schedule = CONSULTA[c][11] + datetime.timedelta(days=(CONSULTA[c][9])) #<--- se aumenta en el rango de días que asigna la consulta la proxima fecha en la que se ejecutara la consulta.
+        f_schedule = t_day + datetime.timedelta(days=(CONSULTA[c][9])) #<--- se aumenta en el rango de días que asigna la consulta la proxima fecha en la que se ejecutara la consulta.
         #--- 
         try:
         #---
