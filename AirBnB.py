@@ -801,13 +801,13 @@ for c in range(len(CONSULTA)):
             #--- COMPARACIÓN DE ANUNCIO
             for itera in range(len(NAME)):
                 #---and A_LINK[itera] == L_LINK[i]
-                if (str.lower(NAME[itera]) == str.lower(L_NAME[i]) and str.lower(KIND[itera]) == str.lower(L_KIND[i])):
+                if (str.lower(NAME[itera]) == str.lower(L_NAME[i]) and A_LINK[itera] == L_LINK[i]):
                     own_id = ID[itera] #<--- ID.
                 #---
             #---
             for itera in range(len(C_NAME)):
                 #---
-                if (str.lower(C_NAME[itera]) == str.lower(L_NAME[i]) and str.lower(C_KIND[itera]) == str.lower(L_KIND[i]) and C_LINK[itera] == L_LINK[i]):
+                if (str.lower(C_NAME[itera]) == str.lower(L_NAME[i]) and C_LINK[itera] == L_LINK[i]):
                     competition_id = C_ID[itera] #<--- C_ID.
                 #---
             #---
