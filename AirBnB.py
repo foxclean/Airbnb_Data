@@ -199,7 +199,7 @@ for i in range(len(ANUNCIOS)):
     CAPACITY.append(t_cap)
     KIND.append(ANUNCIOS[i][9])
     BED.append(ANUNCIOS[i][10])
-    A_LINK.append(ANUNCIOS[i][13])
+    A_LINK.append(str(ANUNCIOS[i][13]))
     #COST.append(ANUNCIOS[i]['PRECIO_PROM'])
     print('id: ',ID[i],', name: ',NAME[i],', capacity: ',CAPACITY[i],', bed: ',BED[i],', price: ',KIND[i],'--','link: ',A_LINK[i])
     print('Correcto #4 -> Se asignaron los valores de "anuncios" extraidos en las listas a usar.')
@@ -608,9 +608,9 @@ for c in range(len(CONSULTA)):
                             for g_link in filters.select(".container_18q6tiq .navigation_5ruk8 .container_1xf3sln .anchor_surdeb"):
                                 temp_link = g_link.get('href')
                                 f_link = temp_link.split('?')
-                                last_link = PORTAL[2] + f_link[0]
+                                last_link = str(PORTAL[2]) + str(f_link[0])
                                 print(last_link)
-                                link.append(last_link)
+                                link.append(str(last_link))
                             #---
                             insert_log((CONSULTA[c][0]),("Intento No." + str(attempts) + " - Se obtuvo correctamente los nombres de los alojamientos"),'','430',pagURL,1) #tipo 0= error, 1= bien, 2= advertencia
                             print('Correcto #19 -> Se extrageron los Nombres. Descripción = ',name)
@@ -792,23 +792,23 @@ for c in range(len(CONSULTA)):
     #---
     if (len(L_POS) == len(L_NAME) and len(L_NAME) == len(L_PRICE) and len(L_PRICE) == len(L_KIND) and len(L_KIND) == len(L_BED) and len(L_BED) == len(L_RATE) and len(L_RATE) == len(L_LINK) ):
         #--- CICLO
-        for i in range(len(L_NAME)):
-            #---
-            
+        for i in range(len(L_NAME)):  
             #--- Variables
             competition_id = None #<--- Almacena el Id de la competencia.
             own_id = None #<--- Almacena el Id de los anuncios propia.
             #--- COMPARACIÓN DE ANUNCIO
-            for itera in range(len(NAME)):
-                #---and A_LINK[itera] == L_LINK[i]
-                if (str.lower(NAME[itera]) == str.lower(L_NAME[i]) and A_LINK[itera] == L_LINK[i]):
-                    own_id = ID[itera] #<--- ID.
+            for itera1 in range(len(A_LINK)):
+                #---                
+                if (L_LINK[i] in A_LINK[itera1]):                    
+                    own_id = ID[itera1] #<--- ID.
+                    time.sleep(60)
+                print('Empresa link = ', A_LINK[itera1],' ----- Anuncio link = ',(L_LINK[i]))                
                 #---
             #---
-            for itera in range(len(C_NAME)):
+            for itera2 in range(len(C_NAME)):
                 #---
-                if (str.lower(C_NAME[itera]) == str.lower(L_NAME[i]) and C_LINK[itera] == L_LINK[i]):
-                    competition_id = C_ID[itera] #<--- C_ID.
+                if (str.lower(C_NAME[itera2]) == str.lower(L_NAME[i]) and (C_LINK[itera2]).replace(" ", "") == (L_LINK[i]).replace(" ", "")):
+                    competition_id = C_ID[itera2] #<--- C_ID.
                 #---
             #---
             try:
