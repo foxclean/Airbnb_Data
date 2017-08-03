@@ -668,6 +668,7 @@ for c in range(len(CONSULTA)):
                                 #---
                                 print(temporal_rate)
                                 #---
+                                print(r_rating)
                                 for i in range(len(r_rating)):
                                     if (string4 in r_rating[i] or r_rating[i] == string5 or r_rating[i] == string6 or r_rating[i] == ''):
                                         rates.append(0)
