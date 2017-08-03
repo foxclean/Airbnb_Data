@@ -503,7 +503,13 @@ for c in range(len(CONSULTA)):
                 allow = False #<--- Variables para hacer iteraciones en caso que algo falle.  
                 attempts = 1 #<--- Variable con el numero de intentos.
                 price_ws = ([price_ws.replace(string3,"") for price_ws in price]) #<--- Se quita el simbolo de EURO en los precios.
-                prices = ([float(prices.replace(string,"")) for prices in price_ws]) #<--- Se quita la palabra "precio" (variable string) de los item de la lista, y se almacena el resultado en prices. Ex: (INIT= "Precio $300" RESULT = "$300").                    
+                prices_1 = ([(re.findall(r"[-+]?\d*\.\d+|\d+", prices_1)) for prices_1 in price_ws]) #<--- Se quita la palabra "precio" (variable string) de los item de la lista, y se almacena el resultado en prices. Ex: (INIT= "Precio $300" RESULT = "$300").
+                #prices = ([float(prices.replace(string,"")) for prices in price_ws])
+                prices = []
+                for temp_p in prices_1:
+                    prices.append(float(temp_p[0])) 
+                #---           
+                print(prices)
                 new_desc = None
                 #---
                 insert_log((CONSULTA[c][0]),"Inicia la extracción de la descripciones.",pagURL,'329-389',pagURL,1) #tipo 0= error, 1= bien, 2= advertencia
@@ -660,6 +666,7 @@ for c in range(len(CONSULTA)):
                                         end = float(temp_filt[0])
                                         temporal_rate.append(end)
                                 #---
+                                print(temporal_rate)
                                 #---
                                 for i in range(len(r_rating)):
                                     if (string4 in r_rating[i] or r_rating[i] == string5 or r_rating[i] == string6 or r_rating[i] == ''):
