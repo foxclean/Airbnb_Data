@@ -243,11 +243,12 @@ for c in range(len(CONSULTA)):
     S_PROGRAM = False    
     #---
     is_date = False #<---- Variable para verificar que la consulta tiene una fecha programada.
-    if(CONSULTA[c][11] != None):        
+    if(CONSULTA[c][11] != None):
+                
         if ((CONSULTA[c][11]).date() < (CONSULTA[c][10]).date()):
             is_date = True
         elif((CONSULTA[c][11]).date() >= (CONSULTA[c][10]).date()):
-            is_date = False
+            is_date = True
             ALLOW_RESET = True
         else:
             is_date = False
