@@ -64,7 +64,9 @@ string3 = "€"
 string4 = 'NUEVO'
 string5 = '1 evaluación'
 string6 = '2 evaluaciones'
-string7 = '3 evaluaciones'
+string7 = 'Superhost'
+string8 = '1 Superhost'
+string9 = '2 Superhost'
 #---
 position = 1 #<--- Posición de los resultados (1,2,3,4,5) ---TODO--- considerar el uso de un arreglo para almacenar todos los resultados.
 #---
@@ -671,7 +673,7 @@ for c in range(len(CONSULTA)):
                                 #---
                                 print(r_rating)
                                 for i in range(len(r_rating)):
-                                    if (string4 in r_rating[i] or r_rating[i] == string5 or r_rating[i] == string6 or r_rating[i] == ''):
+                                    if (string4 in r_rating[i] or r_rating[i] == string5 or r_rating[i] == string6 or r_rating[i] == string7 or r_rating[i] == string8 or r_rating[i] == string9 or r_rating[i] == ''):
                                         rates.append(0)
                                     else:
                                         rates.append(temporal_rate[a])
