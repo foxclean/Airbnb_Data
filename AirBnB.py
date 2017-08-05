@@ -673,7 +673,7 @@ for c in range(len(CONSULTA)):
                                 #---
                                 print(r_rating)
                                 for i in range(len(r_rating)):
-                                    if (string4 in r_rating[i] or r_rating[i] == string5 or r_rating[i] == string6 or r_rating[i] == string7 or r_rating[i] == string8 or r_rating[i] == string9 or r_rating[i] == ''):
+                                    if (string4 in r_rating[i] or string5 in r_rating[i] or string6 in r_rating[i] or r_rating[i] == string7 or r_rating[i] == string8 or r_rating[i] == string9 or r_rating[i] == ''):
                                         rates.append(0)
                                     else:
                                         rates.append(temporal_rate[a])
