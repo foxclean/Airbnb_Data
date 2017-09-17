@@ -265,7 +265,7 @@ for c in range(len(CONSULTA)):
         PAIS = CONSULTA[c][2]
         CIUDAD = CONSULTA[c][3]
         ZONA = CONSULTA[c][4]
-        BODY = '/homes?logo=1' #<--- ADD & TO ADULTS.
+        BODY = '/homes?logo=1&' #<--- ADD & TO ADULTS.
         ADULT = CONSULTA[c][5]
         BODY2 = '&allow_override[]='
         if (is_date == True):
