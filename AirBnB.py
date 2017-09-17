@@ -91,7 +91,7 @@ try:
     #---
     with connection.cursor() as cursor:
         #--- Consulta especifica
-        sql = ("SELECT * FROM SCR_PORTALES WHERE NOMBRE = '" + SITE + "'") 
+        sql = ("SELECT * FROM SCR_PORTALES WHERE NOMBRE = '" + SITE + "'")
         cursor.execute(sql)
         PORTAL = cursor.fetchone()
         #---
@@ -112,7 +112,7 @@ def load_data_consulta():
         #---
         with connection.cursor() as cursor:
             #--- Consulta especifica
-            sql= "SELECT ID_CONSULTA, ID_ANUNCIO, PAIS, CIUDAD, ZONA, ADULTOS, NIÑOS, BEBES, ESTADO, RANGO_DIAS, FECHA_FIN, FECHA_PROGRA, N_MAX_PAG FROM SCR_CONSULTAS WHERE ESTADO = 1 AND ID_PORTAL = " + str(PORTAL[0]) 
+            sql= "SELECT ID_CONSULTA, ID_ANUNCIO, PAIS, CIUDAD, ZONA, ADULTOS, NIÑOS, BEBES, ESTADO, RANGO_DIAS, FECHA_FIN, FECHA_PROGRA, N_MAX_PAG FROM SCR_CONSULTAS WHERE ESTADO = 1 AND ID_PORTAL = " + str(PORTAL[0])
             cursor.execute(sql)
             temp_consulta = cursor.fetchall()
             #---
@@ -180,7 +180,7 @@ try:
     #---
     with connection.cursor() as cursor:
         #--- Consulta especifica
-        sql = "SELECT * FROM SCR_ANUNCIOS WHERE ID_PORTAL = " + str(PORTAL[0]) + "AND ESTADO = 'activo' " 
+        sql = "SELECT * FROM SCR_ANUNCIOS WHERE ID_PORTAL = " + str(PORTAL[0]) + "AND ESTADO = 'activo' "
         cursor.execute(sql)
         ANUNCIOS = cursor.fetchall()
         #---
@@ -214,15 +214,15 @@ def insert_log(id_consulta,mensaje,detalle,linea_cod,l_url,tipo):
         #---
         with connection.cursor() as cursor:
             #--- Consulta especifica
-            sql = "INSERT INTO SCR_LOG (ID_CONSULTA,MENSAJE,LINEA_COD,URL,DETALLE,TIPO) VALUES (%s,%s,%s,%s,%s,%s)" 
+            sql = "INSERT INTO SCR_LOG (ID_CONSULTA,MENSAJE,LINEA_COD,URL,DETALLE,TIPO) VALUES (%s,%s,%s,%s,%s,%s)"
             cursor.execute(sql, (id_consulta, mensaje, linea_cod, l_url,detalle,tipo))
-            
+
             #---
             print('Correcto #5 -> Registro Correcto del Log.')
         connection.commit()
     #---
     except _mssql.MssqlDatabaseException as e:
-        print('Error #5 -> Número de error: ',e.number,' - ','Severidad: ', e.severity) 
+        print('Error #5 -> Número de error: ',e.number,' - ','Severidad: ', e.severity)
 
 #---
 print("------------------------------------------------")
@@ -242,11 +242,11 @@ for c in range(len(CONSULTA)):
     position = 1 #<--- Posición de los resultados (1,2,3,4,5) ---TODO--- considerar el uso de un arreglo para almacenar todos los resultados.
     #---
     ALLOW_RESET = False
-    S_PROGRAM = False    
+    S_PROGRAM = False
     #---
     is_date = False #<---- Variable para verificar que la consulta tiene una fecha programada.
     if(CONSULTA[c][11] != None):
-                
+
         if ((CONSULTA[c][11]).date() < (CONSULTA[c][10]).date()):
             is_date = True
         elif((CONSULTA[c][11]).date() >= (CONSULTA[c][10]).date()):
@@ -255,17 +255,17 @@ for c in range(len(CONSULTA)):
         else:
             is_date = False
     #---
-    if (CONSULTA[c][11] == None or is_date == True):                      
+    if (CONSULTA[c][11] == None or is_date == True):
         #---
         #--- Iteración de páginas.
         page = 0 #<--- Indice Inicial.
         #------------- Inicia Asignación de Valores a las Variables de la URL. -------------#
         #--- URL + PARAMETROS DE LA URL    s
-        BASE = PORTAL[2]        
+        BASE = PORTAL[2]
         PAIS = CONSULTA[c][2]
         CIUDAD = CONSULTA[c][3]
         ZONA = CONSULTA[c][4]
-        BODY = '/homes?' #<--- ADD & TO ADULTS.
+        BODY = '/homes?logo=1' #<--- ADD & TO ADULTS.
         ADULT = CONSULTA[c][5]
         BODY2 = '&allow_override[]='
         if (is_date == True):
@@ -320,8 +320,8 @@ for c in range(len(CONSULTA)):
             #---
             except _mssql.MssqlDatabaseException as e:
             #---
-                print('Error -> Número de error: ',e.number,' - ','Severidad: ', e.severity)   
-            #---  
+                print('Error -> Número de error: ',e.number,' - ','Severidad: ', e.severity)
+            #---
             if (state == True):
                 return "El Script se ejecuto correctamente. Se Ha modificado el estado de ejecución del script."
             else:
@@ -334,10 +334,10 @@ for c in range(len(CONSULTA)):
             try:
                 #---
                 driver.set_page_load_timeout(240)
-                #                 
-                time.sleep(1)                                 
+                #
+                time.sleep(1)
                 driver.get(P_URL) #<--- Navigate to the page.
-                time.sleep(1)  
+                time.sleep(1)
                 print(change_State(True))
             #---
             except TimeoutException:
@@ -348,7 +348,7 @@ for c in range(len(CONSULTA)):
             #---
             print('Correcto #7 -> Se ha extraido el contenido de la página con la URL = "', P_URL,'".')
             #insert_log((CONSULTA[c][0]),'Se Obtuvo el innerHTML de la URL.',URL,'184-196',URL,1) #tipo 0= error, 1= bien, 2= advertencia
-            #---                
+            #---
             #print(BeautifulSoup(innerHTML, "html.parser"))
             return (BeautifulSoup(innerHTML, "html.parser"))
 
@@ -372,7 +372,7 @@ for c in range(len(CONSULTA)):
                 if (bed_name in a_desc[i] and ((indice % 2) != 0)): #<--- Si el indice es impar (1,3,5,7,...) y lleva la palabra asignada a bed_name("cama").
                     temp_desc.append(a_desc[i]) #<--- Se agrega el valor a la lista temporal.
                 elif (bed_name not in a_desc[i] and ((indice % 2) != 0)): #<--- Si el indice es impar (1,3,5,7,...) y no lleva la palabra asignada a la variable bed_name("cama").
-                    temp_desc.append("0 cama")  #<--- Como no se especifico un número de camas, se asigna 0 por defecto.        
+                    temp_desc.append("0 cama")  #<--- Como no se especifico un número de camas, se asigna 0 por defecto.
                     temp_desc.append(a_desc[i]) #<--- Se agrega el valor en el indice "i"
                     indice += 1
                 else:
@@ -417,8 +417,8 @@ for c in range(len(CONSULTA)):
                 print('Correcto #10 -> Se determino el número de pagina = ', iterations,'.')
                 p_i += 10
             #---
-            p_i += 1            
-       
+            p_i += 1
+
         #---
         #------------- Fin. -------------#
 
@@ -431,10 +431,10 @@ for c in range(len(CONSULTA)):
             DESCRIPTION_STATE = False
             RATE_STATE = False
             #--- Variables
-            allow = False #<--- Variables para hacer iteraciones en caso que algo falle.    
+            allow = False #<--- Variables para hacer iteraciones en caso que algo falle.
             numstr = page #<--- Convierte en string el numero de pagina para su uso en la URL (evita un error al concatenar un numero con una cadena de texto).
             pagURL = URL + '&section_offset=' + str(numstr) #<--- Se estructura la URL con el número de página donde hara la busqueda.
-            #--- Listas    
+            #--- Listas
             name = []
             link = []
             kind = []
@@ -457,7 +457,7 @@ for c in range(len(CONSULTA)):
                 return (BeautifulSoup(str(rooms), "html.parser")) #<--- Devuelve los datos filtrados.
             #---
             filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
-            #---            
+            #---
             #--- Obtener datos especificos.
             price = get_content(".ellipsized_1iurgbx .inline_g86r3e", filters) #<--- Filtra mas los datos para sacar los precios de los hospedajes.
             name = get_content(".container_18q6tiq .container_1xf3sln .anchor_surdeb span", filters) #<--- Filtra mas los datos para obtener los nombres de los hospedajes.
@@ -470,7 +470,7 @@ for c in range(len(CONSULTA)):
             #---
             insert_log((CONSULTA[c][0]),"Inicia la extracción de precio.",pagURL,'298-325',pagURL,1) #tipo 0= error, 1= bien, 2= advertencia
             print('Correcto #13 -> Inicia la Extracción de los precios')
-            #---CICLO    
+            #---CICLO
             while (allow == False):
                 #---
                 if len(price) == 0: #<--- Si el tamaño de la lista es 0, quiere decir que hay ningun precio, por ende hay un error y se debe iterar.
@@ -484,9 +484,9 @@ for c in range(len(CONSULTA)):
                     PRICE_STATE = False
                 #---
                 elif (max_attempt == attempts): #<--- Cuando se alcanza el número maximo de intentos permitidos, se cancela.
-                    PRICE_STATE = False            
-                    allow = True 
-                    #---           
+                    PRICE_STATE = False
+                    allow = True
+                    #---
                     insert_log((CONSULTA[c][0]),('Se agotaron el número maximo de intentos (' + str(max_attempt) + ') sin ningun resultado'),'','310',pagURL,0) #tipo 0= error, 1= bien, 2= advertencia
                     print('Error #14 -> Se agotaron el número maximo de intentos (',max_attempt,'). Precios = ',price)
                 #---
@@ -503,30 +503,30 @@ for c in range(len(CONSULTA)):
             #---
             #--- Extracción de la descripción de los Hospedajes
             if (PRICE_STATE == True): #<-- Condición, en caso que PRICE_STATE sea TRUE, como resultado de la extracción de precios, se realiza la siguiente tarea.
-                allow = False #<--- Variables para hacer iteraciones en caso que algo falle.  
+                allow = False #<--- Variables para hacer iteraciones en caso que algo falle.
                 attempts = 1 #<--- Variable con el numero de intentos.
                 price_ws = ([price_ws.replace(string3,"") for price_ws in price]) #<--- Se quita el simbolo de EURO en los precios.
                 prices_1 = ([(re.findall(r"[-+]?\d*\.\d+|\d+", prices_1)) for prices_1 in price_ws]) #<--- Se quita la palabra "precio" (variable string) de los item de la lista, y se almacena el resultado en prices. Ex: (INIT= "Precio $300" RESULT = "$300").
                 #prices = ([float(prices.replace(string,"")) for prices in price_ws])
                 prices = []
                 for temp_p in prices_1:
-                    prices.append(float(temp_p[0])) 
-                #---           
+                    prices.append(float(temp_p[0]))
+                #---
                 print(prices)
                 new_desc = None
                 #---
                 insert_log((CONSULTA[c][0]),"Inicia la extracción de la descripciones.",pagURL,'329-389',pagURL,1) #tipo 0= error, 1= bien, 2= advertencia
                 print('Correcto #15 -> Inicia la Extracción de las descripciones')
-                #---  CICLO      
+                #---  CICLO
                 while (allow == False):
                     #--- Variables temporales
-                    i  = 0 #<--- Número de iteraciones.         
+                    i  = 0 #<--- Número de iteraciones.
                     filt_des = [] #<---Lista para filtrar la descripción.
                     #--- CICLO
                     while i < (len(description)): #<--- Filtro de "Totalmente reembolsable"
                         #---
                         if (string2 in description[i]): #<--- Se determina si el string2 ("Totalmente reembolsable") esta la lista.
-                            i += 1 #<-- No se hace nada.                            
+                            i += 1 #<-- No se hace nada.
                         #---
                         else: #<--- En caso de que no este, se agrega el item a la lista temporal llamada filt_des.
                             filt_des.append(description[i]) #<--- item agregado a la lista temporal de descripción.
@@ -534,14 +534,14 @@ for c in range(len(CONSULTA)):
 
                     #--- Verificación del tamaño de la descripción Generalmente es el doble de la lista de precios (precios = 18 (items), descripción = 36(items)) salvo casos especiales.
                     if len(prices) == (len(filt_des)/2): #<--- Si el numero de item en la lista de precios es igual a la mitad de numeros de item en filt_des.
-                        new_desc = filt_des #<--- se pasan los valores de la lista temporal filt_des a new_des para 
+                        new_desc = filt_des #<--- se pasan los valores de la lista temporal filt_des a new_des para
                         allow = True
                         DESCRIPTION_STATE = True
                         #---
                         insert_log((CONSULTA[c][0]),("Intento No." + str(attempts) + " - Se obtuvo correctamente las descripciones de los alojamientos"),'','353',pagURL,1) #tipo 0= error, 1= bien, 2= advertencia
                         print('Correcto #16 -> Se extrageron las descipciones. Descripción = ',filt_des)
                     #---
-                    elif (len(prices) > (len(filt_des)/2)): #<--- Si el número de items en la lista de precios es mayor a la mitad de numeros de items en filt_des. Ex: (precios = 18 (items), descripción = 35(items))         
+                    elif (len(prices) > (len(filt_des)/2)): #<--- Si el número de items en la lista de precios es mayor a la mitad de numeros de items en filt_des. Ex: (precios = 18 (items), descripción = 35(items))
                         new_desc = reformat_desc(filt_des) #<-- Se llama a la funcion reformat_des para q reorganize los item y los devuelva completos.
                         #---
                         insert_log((CONSULTA[c][0]),("Intento No." + str(attempts) + " - Se re-ordeno correctamente las descripciones de los alojamientos"),'','361',pagURL,1) #tipo 0= error, 1= bien, 2= advertencia
@@ -559,7 +559,7 @@ for c in range(len(CONSULTA)):
                     #---
                     else: #<--- Se itera en busca del funcionamiento de los algoritmos.
                         filters = get_innerHTML(pagURL)
-                        description = get_content("div span .detailWithoutWrap_j1kt73", filters)             
+                        description = get_content("div span .detailWithoutWrap_j1kt73", filters)
                         allow = False
                         DESCRIPTION_STATE = False
                         #---
@@ -567,7 +567,7 @@ for c in range(len(CONSULTA)):
                         print('Advertencia #16 -> El tamaño de la lista de descripciones no es valido . Descripción = ',filt_des)
                     #---
                     attempts += 1
-                
+
 
                 #--- Extracción de los precios de los hospedajes
                 if (DESCRIPTION_STATE == True): #<-- Condición, en caso que DESCRIPTION_STATE sea TRUE, como resultado de la extracción de las descripciones, se realiza la siguiente tarea.
@@ -575,7 +575,7 @@ for c in range(len(CONSULTA)):
                     insert_log((CONSULTA[c][0]),"Inicia la extracción de los nombres.",pagURL,'389-460',pagURL,1) #tipo 0= error, 1= bien, 2= advertencia
                     print('Correcto #17 -> Inicia la Extracción de los nombres')
                     #--- Varaibles temporales
-                    i = 0 #<--- Número de iteraciones.    
+                    i = 0 #<--- Número de iteraciones.
                     allow = False
                     #---
                     #--- Se obtienen el tipo y el numero de cama
@@ -586,12 +586,12 @@ for c in range(len(CONSULTA)):
                         #---
                         num = (re.findall('\\d+', new_desc[i])) #<--- Se extrae el numero de camas de la descripción.
                         bed.append(int(num[0]))
-                        i += 1    
+                        i += 1
                     #---
                     insert_log((CONSULTA[c][0]),"Se ha separado correctamente el tipo de hospedaje y el número de camas.",pagURL,'400-407',pagURL,1) #tipo 0= error, 1= bien, 2= advertencia
                     print('Correcto #18 -> Se ha separado correctamente el tipo de hospedaje y el número de camas')
                     #--- Extracción del nombre
-                    i = 0 #<--- Número de iteraciones.    
+                    i = 0 #<--- Número de iteraciones.
                     while (allow == False):
                         #---
                         if len(name) == 0: #<--- Si el tamaño de la lista de nombres obtenidos es 0.
@@ -625,7 +625,7 @@ for c in range(len(CONSULTA)):
                             print('Correcto #19 -> Se extrageron los Nombres. Descripción = ',name)
                         #--
                         attempts += 1 #<--- Intentos
-                    
+
                     #---
                     #--- Almacenamiento en la base de datos
                     if (NAME_STATE == True): #<-- Condición, en caso que NAME_STATE sea TRUE, como resultado de la extracción de nombres, se realiza la siguiente tarea.
@@ -633,7 +633,7 @@ for c in range(len(CONSULTA)):
                         insert_log((CONSULTA[c][0]),"Inicia la extracción de los valoraciones.",pagURL,'389-460',pagURL,1) #tipo 0= error, 1= bien, 2= advertencia
                         print('Correcto #17 -> Inicia la Extracción de los nombres')
                         #--- Varaibles temporales
-                        i = 0 #<--- Número de iteraciones.    
+                        i = 0 #<--- Número de iteraciones.
                         allow = False
                         #---
                         S_PROGRAM = True
@@ -663,8 +663,8 @@ for c in range(len(CONSULTA)):
                                 temporal_rate = []
                                 a = 0
                                 for rate in filters.select(".infoContainer_v72lrv .statusContainer_sh3xmg span .ratingContainer_inline_36rlri .starRatingContainer_hzkfa span"):
-                                    if (rate.get('aria-label') != None):        
-                                        temp_rate = rate.get('aria-label')           
+                                    if (rate.get('aria-label') != None):
+                                        temp_rate = rate.get('aria-label')
                                         temp_filt = (re.findall(r"[-+]?\d*\.\d+|\d+", temp_rate))
                                         end = float(temp_filt[0])
                                         temporal_rate.append(end)
@@ -695,7 +695,7 @@ for c in range(len(CONSULTA)):
                                 i = 0 #<-- Iteraciones
                                 #--- Almacenamiento de datos
                                 #--- CICLO
-                                while i < (len(prices)):  
+                                while i < (len(prices)):
                                     #--- Variables Generales
                                     L_POS.append(position)
                                     L_NAME.append(name[i])
@@ -706,7 +706,7 @@ for c in range(len(CONSULTA)):
                                     L_RATE.append(rates[i])
                                     #---
                                     insert_log((CONSULTA[c][0]),"Se agregaron los datos de los hospedajes extaidos a la nuevas lista que sera usada para insertar en la BD.",("Precios = " + str(len(prices)) +', Nombres = ' + str(len(name)) + ', Tipos = ' + str(len(kind)) + ' & Camas = ' + str(len(bed)) + ', Valoración = ' + str(len(rates)) + ' y Links = ' + str(len(link)) ),'471 - 482',pagURL,1) #tipo 0= error, 1= bien, 2= advertencia
-                                    print('Correcto #22 -> Se agregaron los datos de los hospedajes extaidos a la nuevas lista que sera usada para insertar en la BD.')          
+                                    print('Correcto #22 -> Se agregaron los datos de los hospedajes extaidos a la nuevas lista que sera usada para insertar en la BD.')
                                     position += 1 #<--- Se aumenta en uno la posición.
                                     i += 1 #<--- Se aumenta la iteración
                             #---
@@ -728,7 +728,7 @@ for c in range(len(CONSULTA)):
                             insert_log((CONSULTA[c][0]),("El tamaño de las listas no concuerda."),("Precios = " + str(len(prices)) +', Nombres = '+ str(len(name)) + ', Tipos = '+ str(len(kind)) + ' & Camas = ' + str(len(bed))),'466',pagURL,0) #tipo 0= error, 1= bien, 2= advertencia
                             print('Error -> El tamaño de las listas no concuerda., se iterara toda la página.')
                             #---TODO--- LOG here.
-                            #                         
+                            #
                     #---
                     else:
                         #---
@@ -758,7 +758,7 @@ for c in range(len(CONSULTA)):
                 print('Error -> Se agotaron el número maximo de intentos (',max_attempt,') sin ningun resultado, se iterara toda la página.')
                 #---TODO--- LOG here.
 
-            #---                         
+            #---
             if (CONSULTA[c][12] != None):
                 if (page == CONSULTA[c][12]):
                     page = page + iterations
@@ -776,7 +776,7 @@ for c in range(len(CONSULTA)):
         #---
         with connection.cursor() as cursor:
             #--- Consulta especifica
-            sql = "SELECT * FROM SCR_COMPETENCIA WHERE ID_PORTAL = " + str(PORTAL[0]) 
+            sql = "SELECT * FROM SCR_COMPETENCIA WHERE ID_PORTAL = " + str(PORTAL[0])
             cursor.execute(sql)
             COMPETENCIA = cursor.fetchall()
             #---
@@ -795,25 +795,25 @@ for c in range(len(CONSULTA)):
         C_LINK.append(COMPETENCIA[i][6])
         #---
         #print('id: ',C_ID[i],', name: ',C_NAME[i],', tipo: ',C_KIND[i],'--')
-    print('Correcto #24 -> Se asignaron los valores de "anuncios" de la competencia extraido extraidos en las listas a usar.')   
-    #---   
+    print('Correcto #24 -> Se asignaron los valores de "anuncios" de la competencia extraido extraidos en las listas a usar.')
+    #---
     #---
     insert_log((CONSULTA[c][0]),"Inicia la inserción de los datos en la Base de Datos.",URL,'425 - 560',URL,1) #tipo 0= error, 1= bien, 2= advertencia
     print('Correcto #25 -> Inicia la inserción de los datos en la Base de Datos.')
     #---
     if (len(L_POS) == len(L_NAME) and len(L_NAME) == len(L_PRICE) and len(L_PRICE) == len(L_KIND) and len(L_KIND) == len(L_BED) and len(L_BED) == len(L_RATE) and len(L_RATE) == len(L_LINK) ):
         #--- CICLO
-        for i in range(len(L_NAME)):  
+        for i in range(len(L_NAME)):
             #--- Variables
             competition_id = None #<--- Almacena el Id de la competencia.
             own_id = None #<--- Almacena el Id de los anuncios propia.
             #--- COMPARACIÓN DE ANUNCIO
             for itera1 in range(len(A_LINK)):
-                #---                
-                if (L_LINK[i] in A_LINK[itera1]):                    
+                #---
+                if (L_LINK[i] in A_LINK[itera1]):
                     own_id = ID[itera1] #<--- ID.
                     time.sleep(60)
-                print('Empresa link = ', A_LINK[itera1],' ----- Anuncio link = ',(L_LINK[i]))                
+                print('Empresa link = ', A_LINK[itera1],' ----- Anuncio link = ',(L_LINK[i]))
                 #---
             #---
             for itera2 in range(len(C_NAME)):
@@ -827,28 +827,28 @@ for c in range(len(CONSULTA)):
                     # Create a new record.
                     if (own_id != None):
                         sql = "INSERT INTO SCR_ANUNCIANTES (ID_ANUNCIO,FECHAI,FECHAF,ORDEN,ID_PORTAL,PRECIO,ID_CONSULTA,TIPO,N_CAMA,RATIO) VALUES (%s ,%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                        cursor.execute(sql, (own_id,CHECKIN.strftime('%Y-%m-%d'),CHECKOUT.strftime('%Y-%m-%d'),L_POS[i],PORTAL[0],L_PRICE[i],CONSULTA[c][0],L_KIND[i],L_BED[i],L_RATE[i])) 
+                        cursor.execute(sql, (own_id,CHECKIN.strftime('%Y-%m-%d'),CHECKOUT.strftime('%Y-%m-%d'),L_POS[i],PORTAL[0],L_PRICE[i],CONSULTA[c][0],L_KIND[i],L_BED[i],L_RATE[i]))
                         connection.commit()
                     #---
-                    elif (competition_id != None):    
+                    elif (competition_id != None):
                         sql = "INSERT INTO SCR_ANUNCIANTES (ID_COMPETENCIA,FECHAI,FECHAF,ORDEN,ID_PORTAL,PRECIO,ID_CONSULTA,TIPO,N_CAMA,RATIO) VALUES (%s ,%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                        cursor.execute(sql, (competition_id,CHECKIN.strftime('%Y-%m-%d'),CHECKOUT.strftime('%Y-%m-%d'),L_POS[i],PORTAL[0],L_PRICE[i],CONSULTA[c][0],L_KIND[i],L_BED[i],L_RATE[i])) 
+                        cursor.execute(sql, (competition_id,CHECKIN.strftime('%Y-%m-%d'),CHECKOUT.strftime('%Y-%m-%d'),L_POS[i],PORTAL[0],L_PRICE[i],CONSULTA[c][0],L_KIND[i],L_BED[i],L_RATE[i]))
                         connection.commit()
                     #----
                     else:
-                        #---                                          
+                        #---
                         sql = u"INSERT INTO SCR_COMPETENCIA (TITULO,ID_PORTAL,TIPO,URL) VALUES (%s, %s, %s, %s)"
                         cursor.execute(sql, (L_NAME[i], PORTAL[0], L_KIND[i], L_LINK[i]))
                         print('----INSERT COMP NAME= ',L_NAME[i],', PORTAL = ', PORTAL[0],', KIND = ',L_KIND[i],'')
                         connection.commit()
                         time.sleep(1)
                         #--- Consulta especifica
-                        sql = "SELECT * FROM SCR_COMPETENCIA WHERE ID_PORTAL = %s AND TITULO = %s AND TIPO = %s AND URL = %s"                  
-                        cursor.execute(sql, (str(PORTAL[0]), L_NAME[i], L_KIND[i], L_LINK[i]))                                                
+                        sql = "SELECT * FROM SCR_COMPETENCIA WHERE ID_PORTAL = %s AND TITULO = %s AND TIPO = %s AND URL = %s"
+                        cursor.execute(sql, (str(PORTAL[0]), L_NAME[i], L_KIND[i], L_LINK[i]))
                         temp_comp = cursor.fetchone()
                         print('---------ID=',temp_comp)
                         if (temp_comp == None):
-                            cursor.execute(sql, (str(PORTAL[0]), L_NAME[i], L_KIND[i]))                                                
+                            cursor.execute(sql, (str(PORTAL[0]), L_NAME[i], L_KIND[i]))
                             temp_comp = cursor.fetchone()
                             print('------second try---ID=',temp_comp)
                         #---
@@ -858,15 +858,15 @@ for c in range(len(CONSULTA)):
                         C_LINK.append(L_LINK[i])
                         #---
                         sql = "INSERT INTO SCR_ANUNCIANTES (ID_COMPETENCIA,FECHAI,FECHAF,ORDEN,ID_PORTAL,PRECIO,ID_CONSULTA,TIPO,N_CAMA,RATIO) VALUES (%s ,%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                        cursor.execute(sql, (temp_comp[0],CHECKIN.strftime('%Y-%m-%d'),CHECKOUT.strftime('%Y-%m-%d'),L_POS[i],PORTAL[0],L_PRICE[i],CONSULTA[c][0],L_KIND[i],L_BED[i],L_RATE[i])) 
+                        cursor.execute(sql, (temp_comp[0],CHECKIN.strftime('%Y-%m-%d'),CHECKOUT.strftime('%Y-%m-%d'),L_POS[i],PORTAL[0],L_PRICE[i],CONSULTA[c][0],L_KIND[i],L_BED[i],L_RATE[i]))
                         #---
                         connection.commit()
                         insert_log((CONSULTA[c][0]),"Inicia la inserción de los datos en la Base de Datos.",URL,'572-599',URL,1) #tipo 0= error, 1= bien, 2= advertencia
                 # connection is not autocommit by default. So you must commit to save
                 # your changes.
-                
 
-            finally:                
+
+            finally:
                 print('Correcto #26 -> Finaliza la inserción de los datos en la Base de Datos.')
     else:
         #---
@@ -876,10 +876,10 @@ for c in range(len(CONSULTA)):
         print('Error -> El tamaño de la lista de los elementos a ingresar a la BD, No Son iguales.')
     print("------------------------------------------------")
     if(S_PROGRAM == True and ALLOW_RESET  == True):
-        #---  
-        t_day = datetime.datetime.now()      
+        #---
+        t_day = datetime.datetime.now()
         f_schedule = t_day + datetime.timedelta(days=(CONSULTA[c][9])) #<--- se aumenta en el rango de días que asigna la consulta la proxima fecha en la que se ejecutara la consulta.
-        #--- 
+        #---
         try:
         #---
             with connection.cursor() as cursor:
@@ -895,14 +895,14 @@ for c in range(len(CONSULTA)):
     #---
     elif (S_PROGRAM == True and ALLOW_RESET  == False):
         #---
-        t_day = None    
+        t_day = None
         if(CONSULTA[c][11] != None):
             t_day = CONSULTA[c][11]
         else:
             t_day = datetime.datetime.now()
         #---
         f_schedule = t_day + datetime.timedelta(days=(CONSULTA[c][9])) #<--- se aumenta en el rango de días que asigna la consulta la proxima fecha en la que se ejecutara la consulta.
-        #--- 
+        #---
         try:
         #---
             with connection.cursor() as cursor:
@@ -917,7 +917,7 @@ for c in range(len(CONSULTA)):
             print('Error# -> Número de error: ',e.number,' - ','Severidad: ', e.severity)
     #---
     print("----- Finaliza consulta ID: ",(CONSULTA[c][0]))
-#----- 
+#-----
 print("------------------------------------------------")
 print("Termino :)")
 print("------------------------------------------------")
