@@ -536,12 +536,12 @@ for c in range(len(CONSULTA)):
                     print(description)
                     while i < (len(description)):
                         filt_des.append(description[i]) #<--- Se extraen el tipo de hospedaje de la descripción.
-                        i += 2
+                        i += 3
                         #---
                         num = (re.findall('\\d+', description[i])) #<--- Se extrae el numero de camas de la descripción.
                         print('Camas: ',num)
                         filt_des.append(int(num[0]))
-                        i += 2
+                        i += 1
                     print('new desciption: ',filt_des)
                     #--- Verificación del tamaño de la descripción Generalmente es el doble de la lista de precios (precios = 18 (items), descripción = 36(items)) salvo casos especiales.
                     if len(prices) == (len(filt_des)/2): #<--- Si el numero de item en la lista de precios es igual a la mitad de numeros de item en filt_des.
