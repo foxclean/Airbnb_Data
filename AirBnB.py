@@ -265,7 +265,7 @@ for c in range(len(CONSULTA)):
         PAIS = CONSULTA[c][2]
         CIUDAD = CONSULTA[c][3]
         ZONA = CONSULTA[c][4]
-        BODY = '/homes?logo=1' #<--- ADD & TO ADULTS.
+        BODY = '/homes?logo=1&' #<--- ADD & TO ADULTS.
         ADULT = CONSULTA[c][5]
         BODY2 = '&allow_override[]='
         if (is_date == True):
@@ -350,6 +350,9 @@ for c in range(len(CONSULTA)):
             #insert_log((CONSULTA[c][0]),'Se Obtuvo el innerHTML de la URL.',URL,'184-196',URL,1) #tipo 0= error, 1= bien, 2= advertencia
             #---
             #print(BeautifulSoup(innerHTML, "html.parser"))
+            #soup = BeautifulSoup(innerHTML, "html.parser")
+            #with open("data.html", "w") as file:
+            #    file.write(str(soup.encode("utf-8")))
             return (BeautifulSoup(innerHTML, "html.parser"))
 
         #---- Funcion General para filtrar contenido.
@@ -395,8 +398,10 @@ for c in range(len(CONSULTA)):
         while p_i <= p_attempts:
             #---
             pagination = get_innerHTML(URL) #<--- Se procesa la URL y obtiene el innerHTML de la URL
-            pag = get_content(".search-results .buttonList_11hau3k li .link_1ko8une", pagination) #<--- Se Filtra el contenido de la pagina.
+            pag = get_content(".search-results div ._12to336 div nav span div ._11hau3k li a div", pagination) #<--- Se Filtra el contenido de la pagina.
+            print('test: ')
              #--- Se convierte el resultado obtenido a numeros.
+            print(pag)
             for i in range(len(pag)):
                 if pag[i] == '': #<--- En ocaciones devuelve un array ['1','2','','8'], donde el tercer valor no tiene nada, y se intenta a convertir a número da error.
                     pag[i] = 0 #<---- Se le da un valor númerico de 0 por defecto.
@@ -459,11 +464,11 @@ for c in range(len(CONSULTA)):
             filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
             #---
             #--- Obtener datos especificos.
-            price = get_content(".ellipsized_1iurgbx .inline_g86r3e", filters) #<--- Filtra mas los datos para sacar los precios de los hospedajes.
-            name = get_content(".container_18q6tiq .container_1xf3sln .anchor_surdeb span", filters) #<--- Filtra mas los datos para obtener los nombres de los hospedajes.
-            description = get_content("div span .detailWithoutWrap_j1kt73", filters) #<--- Filtra más los datos para sacar la descripción de los hospedajes.
-            r_rating = get_content(".infoContainer_v72lrv .statusContainer_sh3xmg", filters)
-            r_link = get_content(".container_18q6tiq .container_1xf3sln .anchor_surdeb span", filters)
+            price = get_content(".search-results ._15ns6vh div ._1iurgbx ._g86r3e ._up0n8v6", filters) #<--- Filtra mas los datos para sacar los precios de los hospedajes.
+            name = get_content(".search-results ._5ruk8 ._1xf3sln ._surdeb span", filters) #<--- Filtra mas los datos para obtener los nombres de los hospedajes.
+            description = get_content(".search-results ._15ns6vh div div ._hylizj6 span", filters) #<--- Filtra más los datos para sacar la descripción de los hospedajes.
+            r_rating = get_content(".search-results ._15ns6vh div div span ._36rlri", filters)
+            r_link = get_content(".search-results ._5ruk8 ._1xf3sln ._surdeb", filters)
             #---
             #--- Se obtienen los precios
             attempts = 1 #<--- Variable con el numero de intentos.
@@ -475,7 +480,7 @@ for c in range(len(CONSULTA)):
                 #---
                 if len(price) == 0: #<--- Si el tamaño de la lista es 0, quiere decir que hay ningun precio, por ende hay un error y se debe iterar.
                     filters = get_innerHTML(pagURL)
-                    price = get_content(".ellipsized_1iurgbx .inline_g86r3e", filters)
+                    price = get_content(".search-results ._15ns6vh div ._1iurgbx ._g86r3e ._up0n8v6", filters)
                     #---
                     insert_log((CONSULTA[c][0]),('Intento No.' + str(attempts) + ' - No hay ningun precio en los datos extraidos.'),'','300',pagURL,2) #tipo 0= error, 1= bien, 2= advertencia
                     print('Advertencia #14 -> No hay ningun precio en los datos extraidos. Precios = ',price)
@@ -501,6 +506,7 @@ for c in range(len(CONSULTA)):
                 attempts +=1
 
             #---
+            print('Descripci: ',description)
             #--- Extracción de la descripción de los Hospedajes
             if (PRICE_STATE == True): #<-- Condición, en caso que PRICE_STATE sea TRUE, como resultado de la extracción de precios, se realiza la siguiente tarea.
                 allow = False #<--- Variables para hacer iteraciones en caso que algo falle.
@@ -510,8 +516,11 @@ for c in range(len(CONSULTA)):
                 #prices = ([float(prices.replace(string,"")) for prices in price_ws])
                 prices = []
                 for temp_p in prices_1:
-                    prices.append(float(temp_p[0]))
+                    if temp_p:
+                        #print(temp_p)
+                        prices.append(float(temp_p[0]))
                 #---
+                print('Los precios')
                 print(prices)
                 new_desc = None
                 #---
@@ -523,15 +532,16 @@ for c in range(len(CONSULTA)):
                     i  = 0 #<--- Número de iteraciones.
                     filt_des = [] #<---Lista para filtrar la descripción.
                     #--- CICLO
-                    while i < (len(description)): #<--- Filtro de "Totalmente reembolsable"
+                    print('desciptcion: ')
+                    print(description)
+                    while i < (len(description)):
+                        filt_des.append(description[i]) #<--- Se extraen el tipo de hospedaje de la descripción.
+                        i += 2
                         #---
-                        if (string2 in description[i]): #<--- Se determina si el string2 ("Totalmente reembolsable") esta la lista.
-                            i += 1 #<-- No se hace nada.
-                        #---
-                        else: #<--- En caso de que no este, se agrega el item a la lista temporal llamada filt_des.
-                            filt_des.append(description[i]) #<--- item agregado a la lista temporal de descripción.
-                            i += 1
-
+                        num = (re.findall('\\d+', description[i])) #<--- Se extrae el numero de camas de la descripción.
+                        filt_des.append(int(num[0]))
+                        i += 2
+                    print('new desciption: ',filt_des)
                     #--- Verificación del tamaño de la descripción Generalmente es el doble de la lista de precios (precios = 18 (items), descripción = 36(items)) salvo casos especiales.
                     if len(prices) == (len(filt_des)/2): #<--- Si el numero de item en la lista de precios es igual a la mitad de numeros de item en filt_des.
                         new_desc = filt_des #<--- se pasan los valores de la lista temporal filt_des a new_des para
@@ -559,7 +569,7 @@ for c in range(len(CONSULTA)):
                     #---
                     else: #<--- Se itera en busca del funcionamiento de los algoritmos.
                         filters = get_innerHTML(pagURL)
-                        description = get_content("div span .detailWithoutWrap_j1kt73", filters)
+                        description = get_content(".search-results ._15ns6vh div div ._hylizj6 span", filters)
                         allow = False
                         DESCRIPTION_STATE = False
                         #---
@@ -580,12 +590,13 @@ for c in range(len(CONSULTA)):
                     #---
                     #--- Se obtienen el tipo y el numero de cama
                     #--- CICLO
+                    print(new_desc)
                     while i < (len(new_desc)):
                         kind.append(new_desc[i]) #<--- Se extraen el tipo de hospedaje de la descripción.
                         i += 1
                         #---
-                        num = (re.findall('\\d+', new_desc[i])) #<--- Se extrae el numero de camas de la descripción.
-                        bed.append(int(num[0]))
+                        #num = (re.findall('\\d+', new_desc[i])) #<--- Se extrae el numero de camas de la descripción.
+                        bed.append(new_desc[i])
                         i += 1
                     #---
                     insert_log((CONSULTA[c][0]),"Se ha separado correctamente el tipo de hospedaje y el número de camas.",pagURL,'400-407',pagURL,1) #tipo 0= error, 1= bien, 2= advertencia
@@ -596,8 +607,8 @@ for c in range(len(CONSULTA)):
                         #---
                         if len(name) == 0: #<--- Si el tamaño de la lista de nombres obtenidos es 0.
                             filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
-                            name = get_content(".container_18q6tiq .container_1xf3sln .anchor_surdeb span", filters) #<--- se filtra nuevamente para obtener el nombre.
-                            r_rating = get_content(".infoContainer_v72lrv .statusContainer_sh3xmg", filters)
+                            name = get_content(".search-results ._15ns6vh div ._1iurgbx ._up0n8v6 span", filters) #<--- se filtra nuevamente para obtener el nombre.
+                            r_rating = get_content(".search-results ._15ns6vh div div span ._36rlri ", filters)
                             NAME_STATE = False
                             allow = False
                             #---
@@ -614,7 +625,7 @@ for c in range(len(CONSULTA)):
                         else: #<--- si se cargan los nombres se termina la iteración.
                             NAME_STATE = True
                             allow = True
-                            for g_link in filters.select(".container_18q6tiq .navigation_5ruk8 .container_1xf3sln .anchor_surdeb"):
+                            for g_link in filters.select(".search-results ._5ruk8 ._1xf3sln ._surdeb"):
                                 temp_link = g_link.get('href')
                                 f_link = temp_link.split('?')
                                 last_link = str(PORTAL[2]) + str(f_link[0])
@@ -643,7 +654,7 @@ for c in range(len(CONSULTA)):
                             print(r_rating)
                             if len(r_rating) == 0: #<--- Si el tamaño de la lista de nombres obtenidos es 0.
                                 filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
-                                r_rating = get_content(".infoContainer_v72lrv .statusContainer_sh3xmg", filters) #<--- se filtra nuevamente para obtener el nombre.
+                                r_rating = get_content(".search-results ._15ns6vh div div span ._36rlri", filters) #<--- se filtra nuevamente para obtener el nombre.
                                 RATE_STATE = False
                                 allow = False
                                 #---
@@ -662,7 +673,7 @@ for c in range(len(CONSULTA)):
                                 allow = True
                                 temporal_rate = []
                                 a = 0
-                                for rate in filters.select(".infoContainer_v72lrv .statusContainer_sh3xmg span .ratingContainer_inline_36rlri .starRatingContainer_hzkfa span"):
+                                for rate in filters.select(".search-results ._15ns6vh div div span ._36rlri ._hzkfa span"):
                                     if (rate.get('aria-label') != None):
                                         temp_rate = rate.get('aria-label')
                                         temp_filt = (re.findall(r"[-+]?\d*\.\d+|\d+", temp_rate))
@@ -670,15 +681,22 @@ for c in range(len(CONSULTA)):
                                         temporal_rate.append(end)
                                 #---
                                 print(temporal_rate)
+                                last_rate = []
+                                for filt in r_rating:
+                                    print("filter: ",filt)
+                                    if filt:
+                                        last_rate.append(filt)
                                 #---
-                                print(r_rating)
-                                for i in range(len(r_rating)):
-                                    if (string4 in r_rating[i] or string5 in r_rating[i] or string6 in r_rating[i] or r_rating[i] == string7 or r_rating[i] == string8 or r_rating[i] == string9 or r_rating[i] == ''):
+                                print('last_rate: ')
+                                print(last_rate)
+                                for i in range(len(last_rate)):
+                                    if (string4 in last_rate[i] or string5 in last_rate[i] or string6 in last_rate[i] or last_rate[i] == string7 or last_rate[i] == string8 or last_rate[i] == string9 or last_rate[i] == ''):
                                         rates.append(0)
                                     else:
                                         rates.append(temporal_rate[a])
                                         a += 1
                                 #---
+                                print('total rate')
                                 print(rates)
                                 insert_log((CONSULTA[c][0]),("Intento No." + str(attempts) + " - Se obtuvo correctamente los nombres de los alojamientos"),'','430',pagURL,1) #tipo 0= error, 1= bien, 2= advertencia
                                 print('Correcto #19 -> Se extrageron los Nombres. Descripción = ',r_rating)
@@ -686,6 +704,10 @@ for c in range(len(CONSULTA)):
                             attempts += 1 #<--- Intentos
                         #---
                         if(RATE_STATE == True):
+                            #---
+                            rates = []
+                            for fix in prices:
+                                rates.append(0);
                             #---
                             insert_log((CONSULTA[c][0]),"Inicia el listado en variables de los datos extraidos para su inserción en la BD.",pagURL,'461 - 492',pagURL,1) #tipo 0= error, 1= bien, 2= advertencia
                             print('Correcto #21 -> Inicia el listado en variables de los datos extraidos para su inserción en la BD.')
