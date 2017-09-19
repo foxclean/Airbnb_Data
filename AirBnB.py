@@ -705,6 +705,10 @@ for c in range(len(CONSULTA)):
                         #---
                         if(RATE_STATE == True):
                             #---
+                            rates = []
+                            for fix in prices:
+                                rates.append(0);
+                            #---
                             insert_log((CONSULTA[c][0]),"Inicia el listado en variables de los datos extraidos para su inserción en la BD.",pagURL,'461 - 492',pagURL,1) #tipo 0= error, 1= bien, 2= advertencia
                             print('Correcto #21 -> Inicia el listado en variables de los datos extraidos para su inserción en la BD.')
                             #---
