@@ -600,9 +600,10 @@ for c in range(len(CONSULTA)):
                         #num = (re.findall('\\d+', new_desc[i])) #<--- Se extrae el numero de camas de la descripción.
                         print(new_desc[i])
                         num = (re.findall('\\d+', new_desc[i]))                        
-                        bed.append(int(num))
+                        bed.append(num)                        
                         i += 1
                     #---
+                    print('camas:  ',bed)
                     insert_log((CONSULTA[c][0]),"Se ha separado correctamente el tipo de hospedaje y el número de camas.",pagURL,'400-407',pagURL,1) #tipo 0= error, 1= bien, 2= advertencia
                     print('Correcto #18 -> Se ha separado correctamente el tipo de hospedaje y el número de camas')
                     #--- Extracción del nombre
