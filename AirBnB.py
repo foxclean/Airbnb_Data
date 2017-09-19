@@ -548,12 +548,14 @@ for c in range(len(CONSULTA)):
                     a = 0
                     #---
                     last = ''
+                    print('Tamaño de la lista: ',len(temporal_des))
                     while a < (len(temporal_des)):
                         #-----------------                                                
                         filt_des.append(temporal_des[a])
                         last = temporal_des[a]
                         a += 1
                         #---
+                        print('a vake: ', a)
                         if (last == temporal_des[a]):
                             a += 1
                         #--
