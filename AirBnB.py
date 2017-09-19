@@ -530,19 +530,37 @@ for c in range(len(CONSULTA)):
                 while (allow == False):
                     #--- Variables temporales
                     i  = 0 #<--- Número de iteraciones.
+                    temporal_des = []
                     filt_des = [] #<---Lista para filtrar la descripción.
                     #--- CICLO
                     print('desciptcion: ')
                     print(description)
                     while i < (len(description)):
-                        filt_des.append(description[i]) #<--- Se extraen el tipo de hospedaje de la descripción.
-                        i += 2
+                        if ('cama' in description[i]):
+                            temporal_des.append(description[i]) #<--- Se extraen el tipo de hospedaje de la descripción.
                         #---
-                         #<--- Se extrae el numero de camas de la descripción.
-                        print('Camas: ',description[i])
-                        filt_des.append(description[i])
-                        i += 2
+                        elif ('apartamento' in description[i] or 'complejo' in description[i] or 'casa' in description[i] or 'habitación' in description[i] or 'entera' in description[i] or 'privada' in description[i] or 'alojamiento' in description[i] or 'entero' in description[i]):
+                            temporal_des.append(description[i])
+                        i += 1
+                        #---
+                        #<--- Se extrae el numero de camas de la descripción.
+                    #----
+                    a = 0
+                    #---
+                    last = ''
+                    while a < (len(temporal_des)):
+                        #-----------------                                                
+                        filt_des.append(temporal_des[a])
+                        last = temporal_des[a]
+                        a += 1
+                        #---
+                        if (last == temporal_des[a]):
+                            a += 1
+                        #--
+                        filt_des.append(temporal_des[a])
+                        a += 2
 
+                    print('---------')
                     print('new desciption: ',filt_des)
                     #--- Verificación del tamaño de la descripción Generalmente es el doble de la lista de precios (precios = 18 (items), descripción = 36(items)) salvo casos especiales.
                     if len(prices) == (len(filt_des)/2): #<--- Si el numero de item en la lista de precios es igual a la mitad de numeros de item en filt_des.
