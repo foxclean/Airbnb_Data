@@ -539,7 +539,7 @@ for c in range(len(CONSULTA)):
                         i += 2
                         #---
                          #<--- Se extrae el numero de camas de la descripción.
-                        print('Camas: ',num)
+                        print('Camas: ',description[i])
                         filt_des.append(description[i])
                         i += 2
 
