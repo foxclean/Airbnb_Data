@@ -556,6 +556,9 @@ for c in range(len(CONSULTA)):
                         a += 1
                         #---
                         print('a vake: ', a)
+                        if (a == len(temporal_des)):
+                            break
+                            
                         if (last == temporal_des[a]):
                             a += 1
                         #--
