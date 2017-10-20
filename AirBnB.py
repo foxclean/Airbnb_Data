@@ -721,7 +721,7 @@ for c in range(len(CONSULTA)):
                                 print('last_rate: ')
                                 print(last_rate)
                                 for i in range(len(name)):
-                                    if(len(last_rate) == (len(name)):
+                                    if(len(last_rate) == len(name)):
                                         if (string4 in last_rate[i] or string5 in last_rate[i] or string6 in last_rate[i] or last_rate[i] == string7 or last_rate[i] == string8 or last_rate[i] == string9 or last_rate[i] == ''):
                                             rates.append(0)
                                         else:
