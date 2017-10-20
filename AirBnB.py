@@ -555,7 +555,7 @@ for c in range(len(CONSULTA)):
                         last = temporal_des[a]
                         a += 1
                         #---
-                        print('a vake: ', a)
+                        print('a vale: ', a)
                         if (a == len(temporal_des)):
                             break
                             
@@ -567,6 +567,8 @@ for c in range(len(CONSULTA)):
 
                     print('---------')
                     print('new desciption: ',filt_des)
+                    print('Tamaño lista Descripción: ',len(filt_des))
+                    print('Tamaño lista Precios: ',len(prices))
                     #--- Verificación del tamaño de la descripción Generalmente es el doble de la lista de precios (precios = 18 (items), descripción = 36(items)) salvo casos especiales.
                     if len(prices) == (len(filt_des)/2): #<--- Si el numero de item en la lista de precios es igual a la mitad de numeros de item en filt_des.
                         new_desc = filt_des #<--- se pasan los valores de la lista temporal filt_des a new_des para
@@ -651,9 +653,10 @@ for c in range(len(CONSULTA)):
                             print('Error #19 -> Se agotaron el número maximo de intentos (',max_attempt,'). Nombres = ',name)
                         #---
                         else: #<--- si se cargan los nombres se termina la iteración.
+                            print('Inicia extracción de links:')
                             NAME_STATE = True
                             allow = True
-                            for g_link in filters.select(".search-results ._o7ccr8 div ._18q6tiq ._1szwzht"):
+                            for g_link in filters.select(".search-results ._o7ccr8 ._9kg52c ._f21qs6 ._v72lrv a"):
                                 temp_link = g_link.get('href')
                                 f_link = temp_link.split('?')
                                 last_link = str(PORTAL[2]) + str(f_link[0])
@@ -718,11 +721,14 @@ for c in range(len(CONSULTA)):
                                 print('last_rate: ')
                                 print(last_rate)
                                 for i in range(len(name)):
-                                    if (string4 in last_rate[i] or string5 in last_rate[i] or string6 in last_rate[i] or last_rate[i] == string7 or last_rate[i] == string8 or last_rate[i] == string9 or last_rate[i] == ''):
-                                        rates.append(0)
+                                    if(len(last_rate) == (len(name)):
+                                        if (string4 in last_rate[i] or string5 in last_rate[i] or string6 in last_rate[i] or last_rate[i] == string7 or last_rate[i] == string8 or last_rate[i] == string9 or last_rate[i] == ''):
+                                            rates.append(0)
+                                        else:
+                                            rates.append(temporal_rate[a])
+                                            a += 1
                                     else:
-                                        rates.append(temporal_rate[a])
-                                        a += 1
+                                        rates.append(0)
                                 #---
                                 print('total rate')
                                 print(rates)
