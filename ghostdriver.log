@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [INFO  - 2017-10-19T06:04:07.174Z] GhostDriver - Main - running on port 50875
 [INFO  - 2017-10-19T06:04:09.173Z] Session [52470df0-b493-11e7-9a3a-2bd00d93771a] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
 [INFO  - 2017-10-19T06:04:09.173Z] Session [52470df0-b493-11e7-9a3a-2bd00d93771a] - page.customHeaders:  - {}
@@ -431,3 +432,13 @@
 [INFO  - 2017-10-20T05:24:56.954Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
 [INFO  - 2017-10-20T05:29:57.292Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
 [INFO  - 2017-10-20T05:35:03.844Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+=======
+[INFO  - 2017-10-20T05:36:34.400Z] GhostDriver - Main - running on port 55081
+[INFO  - 2017-10-20T05:36:35.839Z] Session [a339e780-b558-11e7-b462-55cfe774a394] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2017-10-20T05:36:35.839Z] Session [a339e780-b558-11e7-b462-55cfe774a394] - page.customHeaders:  - {}
+[INFO  - 2017-10-20T05:36:35.839Z] Session [a339e780-b558-11e7-b462-55cfe774a394] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"windows-10-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2017-10-20T05:36:35.839Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: a339e780-b558-11e7-b462-55cfe774a394
+[ERROR - 2017-10-20T05:36:37.325Z] RouterReqHand - _handle.error - {"name":"Missing Command Parameter","message":"{\"headers\":{\"Accept\":\"application/json\",\"Accept-Encoding\":\"identity\",\"Connection\":\"close\",\"Content-Length\":\"73\",\"Content-Type\":\"application/json;charset=UTF-8\",\"Host\":\"127.0.0.1:55081\",\"User-Agent\":\"Python http auth\"},\"httpVersion\":\"1.1\",\"method\":\"POST\",\"post\":\"{\\\"pageLoad\\\": 240000, \\\"sessionId\\\": \\\"a339e780-b558-11e7-b462-55cfe774a394\\\"}\",\"url\":\"/timeouts\",\"urlParsed\":{\"anchor\":\"\",\"query\":\"\",\"file\":\"timeouts\",\"directory\":\"/\",\"path\":\"/timeouts\",\"relative\":\"/timeouts\",\"port\":\"\",\"host\":\"\",\"password\":\"\",\"user\":\"\",\"userInfo\":\"\",\"authority\":\"\",\"protocol\":\"\",\"source\":\"/timeouts\",\"queryKey\":{},\"chunks\":[\"timeouts\"]},\"urlOriginal\":\"/session/a339e780-b558-11e7-b462-55cfe774a394/timeouts\"}","line":546,"sourceURL":"phantomjs://code/session_request_handler.js","stack":"_postTimeout@phantomjs://code/session_request_handler.js:546:73\n_handle@phantomjs://code/session_request_handler.js:148:25\n_reroute@phantomjs://code/request_handler.js:61:20\n_handle@phantomjs://code/router_request_handler.js:78:46"}
+
+  phantomjs://platform/console++.js:263 in error
+>>>>>>> 08c0d5166388bcd8762838633aafd19a9635abbf

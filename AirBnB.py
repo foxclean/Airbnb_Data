@@ -304,7 +304,7 @@ for c in range(len(CONSULTA)):
         #------------- Finaliza estructuración de la URL basado en los parametros que se manejaran. -------------#
 
         #------------- Inicia la Creación de Funciones generales -------------#
-         #--- Función para modificar el estado de la consulta.
+        #--- Función para modificar el estado de la consulta.
         def change_State(state):
             #---
             td = (datetime.datetime.now()) #<--- Fecha del dia de hoy.
@@ -464,11 +464,11 @@ for c in range(len(CONSULTA)):
             filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
             #---
             #--- Obtener datos especificos.
-            price = get_content(".search-results ._15ns6vh div ._1iurgbx ._g86r3e ._up0n8v6", filters) #<--- Filtra mas los datos para sacar los precios de los hospedajes.
-            name = get_content(".search-results ._5ruk8 ._1xf3sln ._surdeb span", filters) #<--- Filtra mas los datos para obtener los nombres de los hospedajes.
-            description = get_content(".search-results ._15ns6vh div div ._hylizj6 span", filters) #<--- Filtra más los datos para sacar la descripción de los hospedajes.
-            r_rating = get_content(".search-results ._15ns6vh div div span ._36rlri", filters)
-            r_link = get_content(".search-results ._5ruk8 ._1xf3sln ._surdeb", filters)
+            price = get_content(".search-results ._o7ccr8 ._15ns6vh div ._1iurgbx ._uv06vjNaN ._up0n8v6", filters) #<--- Filtra mas los datos para sacar los precios de los hospedajes.
+            name = get_content(".search-results ._o7ccr8 div ._18q6tiq ._1szwzht ._1m8bb6v", filters) #<--- Filtra mas los datos para obtener los nombres de los hospedajes.
+            description = get_content(".search-results ._o7ccr8 ._15ns6vh div div ._hylizj6 span", filters) #<--- Filtra más los datos para sacar la descripción de los hospedajes.
+            r_rating = get_content(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri", filters)
+            r_link = get_content(".search-results ._o7ccr8 div ._18q6tiq ._1szwzht", filters)
             #---
             #--- Se obtienen los precios
             attempts = 1 #<--- Variable con el numero de intentos.
