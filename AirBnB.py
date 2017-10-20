@@ -480,7 +480,7 @@ for c in range(len(CONSULTA)):
                 #---
                 if len(price) == 0: #<--- Si el tamaño de la lista es 0, quiere decir que hay ningun precio, por ende hay un error y se debe iterar.
                     filters = get_innerHTML(pagURL)
-                    price = get_content(".search-results ._15ns6vh div ._1iurgbx ._g86r3e ._up0n8v6", filters)
+                    price = get_content(".search-results ._o7ccr8 ._15ns6vh div ._1iurgbx ._uv06vjNaN ._up0n8v6", filters)
                     #---
                     insert_log((CONSULTA[c][0]),('Intento No.' + str(attempts) + ' - No hay ningun precio en los datos extraidos.'),'','300',pagURL,2) #tipo 0= error, 1= bien, 2= advertencia
                     print('Advertencia #14 -> No hay ningun precio en los datos extraidos. Precios = ',price)
@@ -594,7 +594,7 @@ for c in range(len(CONSULTA)):
                     #---
                     else: #<--- Se itera en busca del funcionamiento de los algoritmos.
                         filters = get_innerHTML(pagURL)
-                        description = get_content(".search-results ._15ns6vh div div ._hylizj6 span", filters)
+                        description = get_content(".search-results ._o7ccr8 ._15ns6vh div div ._hylizj6 span", filters)
                         allow = False
                         DESCRIPTION_STATE = False
                         #---
@@ -635,8 +635,8 @@ for c in range(len(CONSULTA)):
                         #---
                         if len(name) == 0: #<--- Si el tamaño de la lista de nombres obtenidos es 0.
                             filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
-                            name = get_content(".search-results ._15ns6vh div ._1iurgbx ._up0n8v6 span", filters) #<--- se filtra nuevamente para obtener el nombre.
-                            r_rating = get_content(".search-results ._15ns6vh div div span ._36rlri ", filters)
+                            name = get_content(".search-results ._o7ccr8 div ._18q6tiq ._1szwzht ._1m8bb6v", filters) #<--- se filtra nuevamente para obtener el nombre.
+                            r_rating = get_content(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri", filters)
                             NAME_STATE = False
                             allow = False
                             #---
@@ -653,7 +653,7 @@ for c in range(len(CONSULTA)):
                         else: #<--- si se cargan los nombres se termina la iteración.
                             NAME_STATE = True
                             allow = True
-                            for g_link in filters.select(".search-results ._5ruk8 ._1xf3sln ._surdeb"):
+                            for g_link in filters.select(".search-results ._o7ccr8 div ._18q6tiq ._1szwzht"):
                                 temp_link = g_link.get('href')
                                 f_link = temp_link.split('?')
                                 last_link = str(PORTAL[2]) + str(f_link[0])
@@ -682,7 +682,7 @@ for c in range(len(CONSULTA)):
                             print(r_rating)
                             if len(r_rating) == 0: #<--- Si el tamaño de la lista de nombres obtenidos es 0.
                                 filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
-                                r_rating = get_content(".search-results ._15ns6vh div div span ._36rlri", filters) #<--- se filtra nuevamente para obtener el nombre.
+                                r_rating = get_content(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri", filters) #<--- se filtra nuevamente para obtener el nombre.
                                 RATE_STATE = False
                                 allow = False
                                 #---
@@ -701,7 +701,7 @@ for c in range(len(CONSULTA)):
                                 allow = True
                                 temporal_rate = []
                                 a = 0
-                                for rate in filters.select(".search-results ._15ns6vh div div span ._36rlri ._hzkfa span"):
+                                for rate in filters.select(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri ._hzkfa span"):
                                     if (rate.get('aria-label') != None):
                                         temp_rate = rate.get('aria-label')
                                         temp_filt = (re.findall(r"[-+]?\d*\.\d+|\d+", temp_rate))
@@ -717,7 +717,7 @@ for c in range(len(CONSULTA)):
                                 #---
                                 print('last_rate: ')
                                 print(last_rate)
-                                for i in range(len(last_rate)):
+                                for i in range(len(name)):
                                     if (string4 in last_rate[i] or string5 in last_rate[i] or string6 in last_rate[i] or last_rate[i] == string7 or last_rate[i] == string8 or last_rate[i] == string9 or last_rate[i] == ''):
                                         rates.append(0)
                                     else:
