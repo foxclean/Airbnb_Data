@@ -530,57 +530,38 @@ for c in range(len(CONSULTA)):
                 while (allow == False):
                     #--- Variables temporales
                     i  = 0 #<--- Número de iteraciones.
-                    temporal_des = []
-                    filt_des = [] #<---Lista para filtrar la descripción.
+                    temporal_des = [] #<---Lista para filtrar la descripción.
                     #--- CICLO
                     print('desciptcion: ')
                     print(description)
                     while i < (len(description)):
-                        if ('cama' in description[i]):
+                        if ('·' in description[i]):
                             temporal_des.append(description[i]) #<--- Se extraen el tipo de hospedaje de la descripción.
-                        #---
-                        elif ('apartamento' in description[i] or 'complejo' in description[i] or 'casa' in description[i] or 'habitación' in description[i] or 'entera' in description[i] or 'privada' in description[i] or 'alojamiento' in description[i] or 'entero' in description[i]):
-                            temporal_des.append(description[i])
                         i += 1
                         #---
                         #<--- Se extrae el numero de camas de la descripción.
                     #----
                     a = 0
                     #---
-                    last = ''
+                    #last = ''
                     print('Tamaño de la lista: ',len(temporal_des))
-                    while a < (len(temporal_des)):
-                        #-----------------                                                
-                        filt_des.append(temporal_des[a])
-                        last = temporal_des[a]
-                        a += 1
-                        #---
-                        print('a vale: ', a)
-                        if (a == len(temporal_des)):
-                            break
-                            
-                        if (last == temporal_des[a]):
-                            a += 1
-                        #--
-                        filt_des.append(temporal_des[a])
-                        a += 2
-
+                    
                     print('---------')
-                    print('new desciption: ',filt_des)
-                    print('Tamaño lista Descripción: ',len(filt_des))
+                    print('new desciption: ',temporal_des)
+                    print('Tamaño lista Descripción: ',len(temporal_des))
                     print('Tamaño lista Precios: ',len(prices))
                     print('Precios: ',(prices))
                     #--- Verificación del tamaño de la descripción Generalmente es el doble de la lista de precios (precios = 18 (items), descripción = 36(items)) salvo casos especiales.
-                    if len(prices) == (len(filt_des)/2): #<--- Si el numero de item en la lista de precios es igual a la mitad de numeros de item en filt_des.
-                        new_desc = filt_des #<--- se pasan los valores de la lista temporal filt_des a new_des para
+                    if len(prices) == (temporal_des): #<--- Si el numero de item en la lista de precios es igual a la mitad de numeros de item en temporal_des.
+                        new_desc = temporal_des #<--- se pasan los valores de la lista temporal temporal_des a new_des para
                         allow = True
                         DESCRIPTION_STATE = True
                         #---
                         insert_log((CONSULTA[c][0]),("Intento No." + str(attempts) + " - Se obtuvo correctamente las descripciones de los alojamientos"),'','353',pagURL,1) #tipo 0= error, 1= bien, 2= advertencia
-                        print('Correcto #16 -> Se extrageron las descipciones. Descripción = ',filt_des)
+                        print('Correcto #16 -> Se extrageron las descipciones. Descripción = ',temporal_des)
                     #---
-                    elif (len(prices) > (len(filt_des)/2)): #<--- Si el número de items en la lista de precios es mayor a la mitad de numeros de items en filt_des. Ex: (precios = 18 (items), descripción = 35(items))
-                        new_desc = reformat_desc(filt_des) #<-- Se llama a la funcion reformat_des para q reorganize los item y los devuelva completos.
+                    elif (len(prices) > (len(temporal_des)/2)): #<--- Si el número de items en la lista de precios es mayor a la mitad de numeros de items en temporal_des. Ex: (precios = 18 (items), descripción = 35(items))
+                        new_desc = reformat_desc(temporal_des) #<-- Se llama a la funcion reformat_des para q reorganize los item y los devuelva completos.
                         #---
                         insert_log((CONSULTA[c][0]),("Intento No." + str(attempts) + " - Se re-ordeno correctamente las descripciones de los alojamientos"),'','361',pagURL,1) #tipo 0= error, 1= bien, 2= advertencia
                         print('Correcto #16 -> Se extrageron las descipciones. Descripción = ',new_desc)
@@ -593,7 +574,7 @@ for c in range(len(CONSULTA)):
                         allow = True
                         #---
                         insert_log((CONSULTA[c][0]),("Se agotaron el número maximo de intentos (" + str(max_attempt) + ") sin ningun resultado"),'','370',pagURL,0) #tipo 0= error, 1= bien, 2= advertencia
-                        print('Error #16 -> Se agotaron el número maximo de intentos (',max_attempt,'). Descripción = ',filt_des)
+                        print('Error #16 -> Se agotaron el número maximo de intentos (',max_attempt,'). Descripción = ',temporal_des)
                     #---
                     else: #<--- Se itera en busca del funcionamiento de los algoritmos.
                         filters = get_innerHTML(pagURL)
@@ -602,7 +583,7 @@ for c in range(len(CONSULTA)):
                         DESCRIPTION_STATE = False
                         #---
                         insert_log((CONSULTA[c][0]),("Intento No." + str(attempts) + " - El tamaño de la lista no es el requerido."),'','377',pagURL,2) #tipo 0= error, 1= bien, 2= advertencia
-                        print('Advertencia #16 -> El tamaño de la lista de descripciones no es valido . Descripción = ',filt_des)
+                        print('Advertencia #16 -> El tamaño de la lista de descripciones no es valido . Descripción = ',temporal_des)
                     #---
                     attempts += 1
 
