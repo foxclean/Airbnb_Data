@@ -552,7 +552,7 @@ for c in range(len(CONSULTA)):
                     print('Tamaño lista Precios: ',len(prices))
                     print('Precios: ',(prices))
                     #--- Verificación del tamaño de la descripción Generalmente es el doble de la lista de precios (precios = 18 (items), descripción = 36(items)) salvo casos especiales.
-                    if len(prices) == (temporal_des): #<--- Si el numero de item en la lista de precios es igual a la mitad de numeros de item en temporal_des.
+                    if len(prices) == (len(temporal_des)/2): #<--- Si el numero de item en la lista de precios es igual a la mitad de numeros de item en temporal_des.
                         new_desc = temporal_des #<--- se pasan los valores de la lista temporal temporal_des a new_des para
                         allow = True
                         DESCRIPTION_STATE = True
@@ -604,7 +604,7 @@ for c in range(len(CONSULTA)):
                     clean_desc = []
                     a = 0
                     while a < (len(new_desc)):
-                        if ('·' in new_desc[a]):
+                        if ('cama' in new_desc[a]):
                             splid_data = new_desc[a].split('·')
                             clean_desc.append(splid_data)
                         a += 1
