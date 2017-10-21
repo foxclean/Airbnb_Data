@@ -467,7 +467,7 @@ for c in range(len(CONSULTA)):
             price = get_content(".search-results ._o7ccr8 ._15ns6vh div ._1asxs4e ._hylizj6 span", filters) #<--- Filtra mas los datos para sacar los precios de los hospedajes.
             name = get_content(".search-results ._o7ccr8 ._15ns6vh div ._1t82e4h2 ._o0r6eqm", filters) #<--- Filtra mas los datos para obtener los nombres de los hospedajes.
             description = get_content(".search-results ._o7ccr8 ._15ns6vh div ._saba1yg ._1127fdt6 span", filters) #<--- Filtra más los datos para sacar la descripción de los hospedajes.
-            r_rating = get_content(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri ._1uyixqdu ._1uyixqdu", filters)
+            r_rating = get_content(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri", filters)
             r_link = get_content(".search-results ._o7ccr8 div ._18q6tiq ._1szwzht", filters)
             #---
             #--- Se obtienen los precios
@@ -639,7 +639,7 @@ for c in range(len(CONSULTA)):
                         if len(name) == 0: #<--- Si el tamaño de la lista de nombres obtenidos es 0.
                             filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
                             name = get_content(".search-results ._o7ccr8 ._15ns6vh div ._1t82e4h2 ._o0r6eqm", filters) #<--- se filtra nuevamente para obtener el nombre.
-                            r_rating = get_content(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri ._1uyixqdu", filters)
+                            r_rating = get_content(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri", filters)
                             NAME_STATE = False
                             allow = False
                             #---
@@ -686,7 +686,7 @@ for c in range(len(CONSULTA)):
                             print(r_rating)
                             if len(r_rating) == 0: #<--- Si el tamaño de la lista de nombres obtenidos es 0.
                                 filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
-                                r_rating = get_content(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri ._1uyixqdu", filters) #<--- se filtra nuevamente para obtener el nombre.
+                                r_rating = get_content(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri", filters) #<--- se filtra nuevamente para obtener el nombre.
                                 RATE_STATE = False
                                 allow = False
                                 #---
