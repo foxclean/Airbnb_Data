@@ -617,7 +617,7 @@ for c in range(len(CONSULTA)):
                         #num = (re.findall('\\d+', clean_desc[i])) #<--- Se extrae el numero de camas de la descripción.
                         print(clean_desc[i][0])
                         num = (re.findall('\\d+', clean_desc[i][1]))                        
-                        bed.append(num)                        
+                        bed.append(int(num[0]))                        
                         i += 1
                     #---
                     print('camas:  ',bed)
