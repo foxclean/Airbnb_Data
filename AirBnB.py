@@ -468,7 +468,7 @@ for c in range(len(CONSULTA)):
             name = get_content(".search-results ._o7ccr8 ._15ns6vh div ._1t82e4h2 ._o0r6eqm", filters) #<--- Filtra mas los datos para obtener los nombres de los hospedajes.
             description = get_content(".search-results ._o7ccr8 ._15ns6vh div ._saba1yg ._1127fdt6 span", filters) #<--- Filtra más los datos para sacar la descripción de los hospedajes.
             r_rating = get_content(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri", filters)
-            r_link = get_content(".search-results ._o7ccr8 div ._18q6tiq ._1szwzht", filters)
+            r_link = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh", filters)
             #---
             #--- Se obtienen los precios
             attempts = 1 #<--- Variable con el numero de intentos.
@@ -648,7 +648,7 @@ for c in range(len(CONSULTA)):
                             print('Inicia extracción de links:')
                             NAME_STATE = True
                             allow = True
-                            for g_link in filters.select(".search-results ._o7ccr8 ._9kg52c ._f21qs6 ._v72lrv a"):
+                            for g_link in filters.select(".search-results ._o7ccr8 .div ._f21qs6 ._v72lrv ._15ns6vh"):
                                 temp_link = g_link.get('href')
                                 f_link = temp_link.split('?')
                                 last_link = str(PORTAL[2]) + str(f_link[0])
