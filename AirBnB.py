@@ -464,7 +464,7 @@ for c in range(len(CONSULTA)):
             filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
             #---
             #--- Obtener datos especificos.
-            price = get_content(".search-results ._o7ccr8 ._15ns6vh div ._1asxs4e ._hylizj6 span", filters) #<--- Filtra mas los datos para sacar los precios de los hospedajes.
+            price = get_content(".search-results ._o7ccr8 ._15ns6vh div ._1asxs4e span ._hylizj6 span", filters) #<--- Filtra mas los datos para sacar los precios de los hospedajes.
             name = get_content(".search-results ._o7ccr8 ._15ns6vh div ._1t82e4h2 ._o0r6eqm", filters) #<--- Filtra mas los datos para obtener los nombres de los hospedajes.
             description = get_content(".search-results ._o7ccr8 ._15ns6vh div ._saba1yg ._1127fdt6 span", filters) #<--- Filtra más los datos para sacar la descripción de los hospedajes.
             r_rating = get_content(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri", filters)
@@ -480,7 +480,7 @@ for c in range(len(CONSULTA)):
                 #---
                 if len(price) == 0: #<--- Si el tamaño de la lista es 0, quiere decir que hay ningun precio, por ende hay un error y se debe iterar.
                     filters = get_innerHTML(pagURL)
-                    price = get_content(".search-results ._o7ccr8 ._15ns6vh div ._1asxs4e ._hylizj6 span", filters)
+                    price = get_content(".search-results ._o7ccr8 ._15ns6vh div ._1asxs4e span ._hylizj6 span", filters)
                     #---
                     insert_log((CONSULTA[c][0]),('Intento No.' + str(attempts) + ' - No hay ningun precio en los datos extraidos.'),'','300',pagURL,2) #tipo 0= error, 1= bien, 2= advertencia
                     print('Advertencia #14 -> No hay ningun precio en los datos extraidos. Precios = ',price)
@@ -618,14 +618,25 @@ for c in range(len(CONSULTA)):
                     #---
                     #--- Se obtienen el tipo y el numero de cama
                     #--- CICLO
-                    print(new_desc)
-                    while i < (len(new_desc)):
-                        kind.append(new_desc[i]) #<--- Se extraen el tipo de hospedaje de la descripción.
+                    print('Vieja descripción', new_desc)
+
+                    clean_desc = []
+                    a = 0
+                    while a < (len(new_desc)):
+                        if ('·' in new_desc[a]):
+                            splid_data = new_desc[a].split('·')
+                            clean_desc.append(splid_data)
+                        a += 1
+                    #----
+                    print('Nueva descripción', clean_desc)
+                    #---
+                    while i < (len(clean_desc)):
+                        kind.append(clean_desc[i]) #<--- Se extraen el tipo de hospedaje de la descripción.
                         i += 1
                         #---
-                        #num = (re.findall('\\d+', new_desc[i])) #<--- Se extrae el numero de camas de la descripción.
-                        print(new_desc[i])
-                        num = (re.findall('\\d+', new_desc[i]))                        
+                        #num = (re.findall('\\d+', clean_desc[i])) #<--- Se extrae el numero de camas de la descripción.
+                        print(clean_desc[i])
+                        num = (re.findall('\\d+', clean_desc[i]))                        
                         bed.append(num)                        
                         i += 1
                     #---
