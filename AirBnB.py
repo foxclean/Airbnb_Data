@@ -631,12 +631,11 @@ for c in range(len(CONSULTA)):
                     print('Nueva descripción', clean_desc)
                     #---
                     while i < (len(clean_desc)):
-                        kind.append(clean_desc[i]) #<--- Se extraen el tipo de hospedaje de la descripción.
-                        i += 1
+                        kind.append(clean_desc[i][0]) #<--- Se extraen el tipo de hospedaje de la descripción.
                         #---
                         #num = (re.findall('\\d+', clean_desc[i])) #<--- Se extrae el numero de camas de la descripción.
-                        print(clean_desc[i])
-                        num = (re.findall('\\d+', clean_desc[i]))                        
+                        print(clean_desc[i][0])
+                        num = (re.findall('\\d+', clean_desc[i][1]))                        
                         bed.append(num)                        
                         i += 1
                     #---
