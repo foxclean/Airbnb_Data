@@ -464,10 +464,10 @@ for c in range(len(CONSULTA)):
             filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
             #---
             #--- Obtener datos especificos.
-            price = get_content(".search-results ._o7ccr8 ._15ns6vh div ._1iurgbx ._uv06vjNaN ._up0n8v6", filters) #<--- Filtra mas los datos para sacar los precios de los hospedajes.
-            name = get_content(".search-results ._o7ccr8 div ._18q6tiq ._1szwzht ._1m8bb6v", filters) #<--- Filtra mas los datos para obtener los nombres de los hospedajes.
-            description = get_content(".search-results ._o7ccr8 ._15ns6vh div div ._hylizj6 span", filters) #<--- Filtra más los datos para sacar la descripción de los hospedajes.
-            r_rating = get_content(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri", filters)
+            price = get_content(".search-results ._o7ccr8 ._15ns6vh div ._1asxs4e ._hylizj6 span", filters) #<--- Filtra mas los datos para sacar los precios de los hospedajes.
+            name = get_content(".search-results ._o7ccr8 ._15ns6vh div ._1t82e4h2 ._o0r6eqm", filters) #<--- Filtra mas los datos para obtener los nombres de los hospedajes.
+            description = get_content(".search-results ._o7ccr8 ._15ns6vh div ._saba1yg ._1127fdt6 span", filters) #<--- Filtra más los datos para sacar la descripción de los hospedajes.
+            r_rating = get_content(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri ._1uyixqdu ._1uyixqdu", filters)
             r_link = get_content(".search-results ._o7ccr8 div ._18q6tiq ._1szwzht", filters)
             #---
             #--- Se obtienen los precios
@@ -480,7 +480,7 @@ for c in range(len(CONSULTA)):
                 #---
                 if len(price) == 0: #<--- Si el tamaño de la lista es 0, quiere decir que hay ningun precio, por ende hay un error y se debe iterar.
                     filters = get_innerHTML(pagURL)
-                    price = get_content(".search-results ._o7ccr8 ._15ns6vh div ._1iurgbx ._uv06vjNaN ._up0n8v6", filters)
+                    price = get_content(".search-results ._o7ccr8 ._15ns6vh div ._1asxs4e ._hylizj6 span", filters)
                     #---
                     insert_log((CONSULTA[c][0]),('Intento No.' + str(attempts) + ' - No hay ningun precio en los datos extraidos.'),'','300',pagURL,2) #tipo 0= error, 1= bien, 2= advertencia
                     print('Advertencia #14 -> No hay ningun precio en los datos extraidos. Precios = ',price)
@@ -569,6 +569,7 @@ for c in range(len(CONSULTA)):
                     print('new desciption: ',filt_des)
                     print('Tamaño lista Descripción: ',len(filt_des))
                     print('Tamaño lista Precios: ',len(prices))
+                    print('Precios: ',(prices))
                     #--- Verificación del tamaño de la descripción Generalmente es el doble de la lista de precios (precios = 18 (items), descripción = 36(items)) salvo casos especiales.
                     if len(prices) == (len(filt_des)/2): #<--- Si el numero de item en la lista de precios es igual a la mitad de numeros de item en filt_des.
                         new_desc = filt_des #<--- se pasan los valores de la lista temporal filt_des a new_des para
@@ -596,7 +597,7 @@ for c in range(len(CONSULTA)):
                     #---
                     else: #<--- Se itera en busca del funcionamiento de los algoritmos.
                         filters = get_innerHTML(pagURL)
-                        description = get_content(".search-results ._o7ccr8 ._15ns6vh div div ._hylizj6 span", filters)
+                        description = get_content(".search-results ._o7ccr8 ._15ns6vh div ._saba1yg ._1127fdt6 span", filters)
                         allow = False
                         DESCRIPTION_STATE = False
                         #---
@@ -637,8 +638,8 @@ for c in range(len(CONSULTA)):
                         #---
                         if len(name) == 0: #<--- Si el tamaño de la lista de nombres obtenidos es 0.
                             filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
-                            name = get_content(".search-results ._o7ccr8 div ._18q6tiq ._1szwzht ._1m8bb6v", filters) #<--- se filtra nuevamente para obtener el nombre.
-                            r_rating = get_content(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri", filters)
+                            name = get_content(".search-results ._o7ccr8 ._15ns6vh div ._1t82e4h2 ._o0r6eqm", filters) #<--- se filtra nuevamente para obtener el nombre.
+                            r_rating = get_content(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri ._1uyixqdu", filters)
                             NAME_STATE = False
                             allow = False
                             #---
@@ -685,7 +686,7 @@ for c in range(len(CONSULTA)):
                             print(r_rating)
                             if len(r_rating) == 0: #<--- Si el tamaño de la lista de nombres obtenidos es 0.
                                 filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
-                                r_rating = get_content(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri", filters) #<--- se filtra nuevamente para obtener el nombre.
+                                r_rating = get_content(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri ._1uyixqdu", filters) #<--- se filtra nuevamente para obtener el nombre.
                                 RATE_STATE = False
                                 allow = False
                                 #---
@@ -704,7 +705,7 @@ for c in range(len(CONSULTA)):
                                 allow = True
                                 temporal_rate = []
                                 a = 0
-                                for rate in filters.select(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri ._hzkfa span"):
+                                for rate in filters.select(".search-results ._o7ccr8 ._15ns6vh div div span ._36rlri ._1uyixqdu span"):
                                     if (rate.get('aria-label') != None):
                                         temp_rate = rate.get('aria-label')
                                         temp_filt = (re.findall(r"[-+]?\d*\.\d+|\d+", temp_rate))
