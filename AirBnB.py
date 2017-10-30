@@ -464,10 +464,10 @@ for c in range(len(CONSULTA)):
             filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
             #---
             #--- Obtener datos especificos.
-            price = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh div ._1asxs4e span ._hylizj6 span", filters) #<--- Filtra mas los datos para sacar los precios de los hospedajes.
-            name = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh div ._1t82e4h2 ._o0r6eqm", filters) #<--- Filtra mas los datos para obtener los nombres de los hospedajes.
-            description = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh div ._saba1yg ._1127fdt6 span", filters) #<--- Filtra más los datos para sacar la descripción de los hospedajes.
-            r_rating = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh div div span ._36rlri", filters)
+            price = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh ._1asxs4e span ._hylizj6 span", filters) #<--- Filtra mas los datos para sacar los precios de los hospedajes.
+            name = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh ._1t82e4h2 ._o0r6eqm", filters) #<--- Filtra mas los datos para obtener los nombres de los hospedajes.
+            description = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh ._saba1yg ._1127fdt6 span", filters) #<--- Filtra más los datos para sacar la descripción de los hospedajes.
+            r_rating = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh div span ._36rlri", filters)
             r_link = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh", filters) #--
             #---
             #--- Se obtienen los precios
