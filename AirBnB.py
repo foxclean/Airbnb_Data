@@ -464,8 +464,8 @@ for c in range(len(CONSULTA)):
             filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
             #---
             #--- Obtener datos especificos.
-            price = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh ._1asxs4e span ._hylizj6 span", filters) #<--- Filtra mas los datos para sacar los precios de los hospedajes.
-            name = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh ._1t82e4h2 ._o0r6eqm", filters) #<--- Filtra mas los datos para obtener los nombres de los hospedajes.
+            price = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh div div ._1asxs4e span ._hylizj6 span", filters) #<--- Filtra mas los datos para sacar los precios de los hospedajes.
+            name = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh div ._1t82e4h2 ._o0r6eqm", filters) #<--- Filtra mas los datos para obtener los nombres de los hospedajes.
             description = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh ._saba1yg ._1127fdt6 span", filters) #<--- Filtra más los datos para sacar la descripción de los hospedajes.
             r_rating = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh span ._36rlri", filters)
             r_link = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh", filters) #--
@@ -480,7 +480,7 @@ for c in range(len(CONSULTA)):
                 #---
                 if len(price) == 0: #<--- Si el tamaño de la lista es 0, quiere decir que hay ningun precio, por ende hay un error y se debe iterar.
                     filters = get_innerHTML(pagURL)
-                    price = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh ._1asxs4e span ._hylizj6 span", filters)
+                    price = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh div div ._1asxs4e span ._hylizj6 span", filters)
                     #---
                     insert_log((CONSULTA[c][0]),('Intento No.' + str(attempts) + ' - No hay ningun precio en los datos extraidos.'),'','300',pagURL,2) #tipo 0= error, 1= bien, 2= advertencia
                     print('Advertencia #14 -> No hay ningun precio en los datos extraidos. Precios = ',price)
@@ -643,7 +643,7 @@ for c in range(len(CONSULTA)):
                         #---
                         if len(name) == 0: #<--- Si el tamaño de la lista de nombres obtenidos es 0.
                             filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
-                            name = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh ._1t82e4h2 ._o0r6eqm", filters) #<--- se filtra nuevamente para obtener el nombre.
+                            name = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh div ._1t82e4h2 ._o0r6eqm", filters) #<--- se filtra nuevamente para obtener el nombre.
                             r_rating = get_content(".search-results ._f21qs6 ._v72lrv ._15ns6vh div span ._36rlri", filters)
                             NAME_STATE = False
                             allow = False
