@@ -662,7 +662,7 @@ for c in range(len(CONSULTA)):
                             print('Inicia extracción de links:')
                             NAME_STATE = True
                             allow = True
-                            for g_link in filters.select(".search-results ._f21qs6 ._v72lrv div ._f21qs6 ._v72lrv ._15ns6vh"):
+                            for g_link in filters.select(".search-results ._f21qs6 ._v72lrv ._15ns6vh"):
                                 temp_link = g_link.get('href')
                                 f_link = temp_link.split('?')
                                 last_link = str(PORTAL[2]) + str(f_link[0])
