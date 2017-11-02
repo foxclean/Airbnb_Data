@@ -70,7 +70,7 @@ string9 = '2 Superhost'
 #---
 position = 1 #<--- Posición de los resultados (1,2,3,4,5) ---TODO--- considerar el uso de un arreglo para almacenar todos los resultados.
 #---
-max_attempt = 16
+max_attempt = 3
 today = (datetime.datetime.now()) #<--- Fecha del dia de hoy.
 URL = ""
 S_PROGRAM = False #<--- Estado de la fecha programada.
