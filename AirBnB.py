@@ -605,7 +605,7 @@ for c in range(len(CONSULTA)):
                     clean_desc = []
                     a = 0
                     while a < (len(new_desc)):
-                        if ('cama' in new_desc[a]):
+                        if ('cama' in new_desc[a] or 'sofa' in new_desc[a]):
                             splid_data = new_desc[a].split('·')
                             clean_desc.append(splid_data)
                         a += 1
@@ -621,7 +621,7 @@ for c in range(len(CONSULTA)):
                             num = (re.findall('\\d+', clean_desc[i][1]))                        
                             bed.append(int(num[0]))
                         else:
-                            if ('cama' in clean_desc[i][0]):
+                            if ('cama' in clean_desc[i][0] or 'sofa' in clean_desc[i][0]):
                                 kind.append('No definido') #<--- Se extraen el tipo de hospedaje de la descripción.
                                 #---
                                 #num = (re.findall('\\d+', clean_desc[i])) #<--- Se extrae el numero de camas de la descripción.
