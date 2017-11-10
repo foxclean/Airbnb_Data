@@ -1,12 +1,12 @@
-[INFO  - 2017-11-10T22:55:54.095Z] GhostDriver - Main - running on port 64198
-[INFO  - 2017-11-10T22:55:55.611Z] Session [4f36bd70-c66a-11e7-9467-37fcac6d2a67] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
-[INFO  - 2017-11-10T22:55:55.611Z] Session [4f36bd70-c66a-11e7-9467-37fcac6d2a67] - page.customHeaders:  - {}
-[INFO  - 2017-11-10T22:55:55.611Z] Session [4f36bd70-c66a-11e7-9467-37fcac6d2a67] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"windows-10-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
-[INFO  - 2017-11-10T22:55:55.611Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 4f36bd70-c66a-11e7-9467-37fcac6d2a67
-[ERROR - 2017-11-10T22:56:25.225Z] Session [4f36bd70-c66a-11e7-9467-37fcac6d2a67] - page.onError - msg: Error: Loading chunk 202 failed.
+[INFO  - 2017-11-10T23:05:18.803Z] GhostDriver - Main - running on port 43639
+[INFO  - 2017-11-10T23:05:19.871Z] Session [9f8c1e90-c66b-11e7-94bf-adff68e78986] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2017-11-10T23:05:19.871Z] Session [9f8c1e90-c66b-11e7-94bf-adff68e78986] - page.customHeaders:  - {}
+[INFO  - 2017-11-10T23:05:19.871Z] Session [9f8c1e90-c66b-11e7-94bf-adff68e78986] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"windows-8.1-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2017-11-10T23:05:19.871Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 9f8c1e90-c66b-11e7-94bf-adff68e78986
+[ERROR - 2017-11-10T23:05:34.891Z] Session [9f8c1e90-c66b-11e7-94bf-adff68e78986] - page.onError - msg: Error: Loading chunk 822 failed.
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-11-10T22:56:25.225Z] Session [4f36bd70-c66a-11e7-9467-37fcac6d2a67] - page.onError - stack:
+[ERROR - 2017-11-10T23:05:34.892Z] Session [9f8c1e90-c66b-11e7-94bf-adff68e78986] - page.onError - stack:
   apply (:0)
 
   phantomjs://platform/console++.js:263 in error
