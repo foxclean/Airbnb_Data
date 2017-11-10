@@ -203,7 +203,7 @@ for i in range(len(ANUNCIOS)):
     BED.append(ANUNCIOS[i][10])
     A_LINK.append(str(ANUNCIOS[i][13]))
     #COST.append(ANUNCIOS[i]['PRECIO_PROM'])
-    print('id: ',ID[i],', name: ',NAME[i],', capacity: ',CAPACITY[i],', bed: ',BED[i],', price: ',KIND[i],'--','link: ',A_LINK[i])
+    #print('id: ',ID[i],', name: ',NAME[i],', capacity: ',CAPACITY[i],', bed: ',BED[i],', price: ',KIND[i],'--','link: ',A_LINK[i])
     print('Correcto #4 -> Se asignaron los valores de "anuncios" extraidos en las listas a usar.')
 #---
 #------------- Finaliza Consulta a BD para Obtener Datos Almacenados. -------------#
