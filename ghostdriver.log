@@ -3,3 +3,10 @@
 [INFO  - 2017-11-10T22:55:55.611Z] Session [4f36bd70-c66a-11e7-9467-37fcac6d2a67] - page.customHeaders:  - {}
 [INFO  - 2017-11-10T22:55:55.611Z] Session [4f36bd70-c66a-11e7-9467-37fcac6d2a67] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"windows-10-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
 [INFO  - 2017-11-10T22:55:55.611Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 4f36bd70-c66a-11e7-9467-37fcac6d2a67
+[ERROR - 2017-11-10T22:56:25.225Z] Session [4f36bd70-c66a-11e7-9467-37fcac6d2a67] - page.onError - msg: Error: Loading chunk 202 failed.
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-11-10T22:56:25.225Z] Session [4f36bd70-c66a-11e7-9467-37fcac6d2a67] - page.onError - stack:
+  apply (:0)
+
+  phantomjs://platform/console++.js:263 in error
