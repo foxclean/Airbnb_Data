@@ -605,7 +605,7 @@ for c in range(len(CONSULTA)):
                     clean_desc = []
                     a = 0
                     while a < (len(new_desc)):
-                        if ('cama' in new_desc[a] or 'sofa' in new_desc[a]):
+                        if ('cama' in new_desc[a] or 'sof' in new_desc[a]):
                             splid_data = new_desc[a].split('·')
                             clean_desc.append(splid_data)
                         a += 1
