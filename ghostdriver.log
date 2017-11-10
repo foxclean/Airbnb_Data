@@ -3,3 +3,4 @@
 [INFO  - 2017-11-10T23:21:43.909Z] Session [ea143fe0-c66d-11e7-a5ef-8dbb5d3f8ec1] - page.customHeaders:  - {}
 [INFO  - 2017-11-10T23:21:43.909Z] Session [ea143fe0-c66d-11e7-a5ef-8dbb5d3f8ec1] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"windows-8.1-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
 [INFO  - 2017-11-10T23:21:43.909Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: ea143fe0-c66d-11e7-a5ef-8dbb5d3f8ec1
+[INFO  - 2017-11-10T23:26:44.341Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
