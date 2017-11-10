@@ -621,7 +621,7 @@ for c in range(len(CONSULTA)):
                             num = (re.findall('\\d+', clean_desc[i][1]))                        
                             bed.append(int(num[0]))
                         else:
-                            if ('cama' in clean_desc[i][0] or 'sofa' in clean_desc[i][0]):
+                            if ('cama' in clean_desc[i][0] or 'sof' in clean_desc[i][0]):
                                 kind.append('No definido') #<--- Se extraen el tipo de hospedaje de la descripción.
                                 #---
                                 #num = (re.findall('\\d+', clean_desc[i])) #<--- Se extrae el numero de camas de la descripción.
