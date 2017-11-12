@@ -333,9 +333,9 @@ for c in range(len(CONSULTA)):
             #---
             try:
                 #---
-                driver.set_page_load_timeout(240)
+                driver.set_page_load_timeout(200)
                 #
-                #time.sleep(1)
+                time.sleep(1)
                 driver.get(P_URL) #<--- Navigate to the page.
                 time.sleep(1)
                 print(change_State(True))
