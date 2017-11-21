@@ -661,7 +661,7 @@ for c in range(len(CONSULTA)):
                         #---
                         if len(name) == 0: #<--- Si el tamaño de la lista de nombres obtenidos es 0.
                             filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
-                            name = get_content(".search-results ._o7ccr8 ._v72lrv div ._15ns6vh div ._2pfeazg ._o0r6eqm", filters) #<--- se filtra nuevamente para obtener el nombre.
+                            name = get_content(".search-results ._o7ccr8 ._v72lrv div ._15ns6vh ._2pfeazg ._o0r6eqm", filters) #<--- se filtra nuevamente para obtener el nombre.
                             r_rating = get_content(".search-results ._o7ccr8 ._v72lrv div ._15ns6vh div span ._36rlri ._1uyixqdu", filters)
                             NAME_STATE = False
                             allow = False
