@@ -464,10 +464,10 @@ for c in range(len(CONSULTA)):
             filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
             #---
             #--- Obtener datos especificos.
-            price = get_content(".search-results ._o7ccr8 ._v72lrv div ._15ns6vh div ._1asxs4e span ._hylizj6 span", filters) #<--- Filtra mas los datos para sacar los precios de los hospedajes.
+            price = get_content(".search-results ._o7ccr8 ._v72lrv div ._15ns6vh div ._1h2f27w span ._hylizj6 span", filters) #<--- Filtra mas los datos para sacar los precios de los hospedajes.
             name = get_content(".search-results ._o7ccr8 ._v72lrv div ._15ns6vh ._2pfeazg ._o0r6eqm", filters) #<--- Filtra mas los datos para obtener los nombres de los hospedajes.
             description = get_content(".search-results ._o7ccr8 ._v72lrv div ._15ns6vh ._136t9x0g ._1127fdt6 span", filters) #<--- Filtra más los datos para sacar la descripción de los hospedajes.
-            r_rating = get_content(".search-results ._o7ccr8 ._v72lrv div ._15ns6vh span ._36rlri", filters)
+            r_rating = get_content(".search-results ._o7ccr8 ._v72lrv div ._15ns6vh div span ._36rlri ._1uyixqdu", filters)
             r_link = get_content(".search-results ._o7ccr8 ._v72lrv div ._15ns6vh", filters) #--
             #---
             #--- Se obtienen los precios
@@ -481,7 +481,7 @@ for c in range(len(CONSULTA)):
                 #---
                 if len(price) == 0: #<--- Si el tamaño de la lista es 0, quiere decir que hay ningun precio, por ende hay un error y se debe iterar.
                     filters = get_innerHTML(pagURL)
-                    price = get_content(".search-results ._o7ccr8 ._v72lrv div ._15ns6vh ._1asxs4e span ._hylizj6 span", filters)
+                    price = get_content(".search-results ._o7ccr8 ._v72lrv div ._15ns6vh ._1h2f27w span ._hylizj6 span", filters)
                     #---
                     insert_log((CONSULTA[c][0]),('Intento No.' + str(attempts) + ' - No hay ningun precio en los datos extraidos.'),'','300',pagURL,2) #tipo 0= error, 1= bien, 2= advertencia
                     print('Advertencia #14 -> No hay ningun precio en los datos extraidos. Precios = ',price)
@@ -545,7 +545,7 @@ for c in range(len(CONSULTA)):
                         #<--- Se extrae el numero de camas de la descripción.
                     #----
                     print("Separar duplicados, tamano de la lista de descripciones = ", len(filter_1))
-                    if (len(filter_1) == (len(prices)*2)):
+                    if (len(filter_1) > (len(prices))):
                         x = 0
                         while x < (len(filter_1)):
                             # <--- Se extraen el tipo de hospedaje de la descripción.
@@ -555,6 +555,10 @@ for c in range(len(CONSULTA)):
                     else:
                         temporal_des = filter_1
                     #---
+                    if len(temporal_des) < len(prices):
+                        while len(temporal_des) < len(prices):
+                            temporal_des.append('Habitación privada · 1 cama')
+                            
                     a = 0
                     #---
                     #last = ''
@@ -658,7 +662,7 @@ for c in range(len(CONSULTA)):
                         if len(name) == 0: #<--- Si el tamaño de la lista de nombres obtenidos es 0.
                             filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
                             name = get_content(".search-results ._o7ccr8 ._v72lrv div ._15ns6vh div ._2pfeazg ._o0r6eqm", filters) #<--- se filtra nuevamente para obtener el nombre.
-                            r_rating = get_content(".search-results ._o7ccr8 ._v72lrv div ._15ns6vh div span ._36rlri", filters)
+                            r_rating = get_content(".search-results ._o7ccr8 ._v72lrv div ._15ns6vh div span ._36rlri ._1uyixqdu", filters)
                             NAME_STATE = False
                             allow = False
                             #---
@@ -705,7 +709,7 @@ for c in range(len(CONSULTA)):
                             print(r_rating)
                             if len(r_rating) == 0: #<--- Si el tamaño de la lista de nombres obtenidos es 0.
                                 filters = get_innerHTML(pagURL) #<--- Variable donde se manejaran los datos filtrados
-                                r_rating = get_content(".search-results ._o7ccr8 ._v72lrv div ._15ns6vh div span ._36rlri", filters) #<--- se filtra nuevamente para obtener el nombre.
+                                r_rating = get_content(".search-results ._o7ccr8 ._v72lrv div ._15ns6vh div span ._36rlri ._1uyixqdu", filters) #<--- se filtra nuevamente para obtener el nombre.
                                 RATE_STATE = False
                                 allow = False
                                 #---
