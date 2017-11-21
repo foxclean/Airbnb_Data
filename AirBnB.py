@@ -333,9 +333,9 @@ for c in range(len(CONSULTA)):
             #---
             try:
                 #---
-                driver.set_page_load_timeout(240)
+                driver.set_page_load_timeout(200)
                 #
-                #time.sleep(1)
+                time.sleep(1)
                 driver.get(P_URL) #<--- Navigate to the page.
                 time.sleep(1)
                 print(change_State(True))
@@ -531,17 +531,30 @@ for c in range(len(CONSULTA)):
                 while (allow == False):
                     #--- Variables temporales
                     i  = 0 #<--- Número de iteraciones.
+                    filter_1 = [] #<---Lista para filtrar la descripción.
+                    filter_2 = [] #<---Lista para filtrar la descripción.
                     temporal_des = [] #<---Lista para filtrar la descripción.
                     #--- CICLO
-                    print('desciptcion: ')
+                    print('descriptcion: ')
                     print(description)
                     while i < (len(description)):
-                        if ('·' in description[i]):
-                            temporal_des.append(description[i]) #<--- Se extraen el tipo de hospedaje de la descripción.
+                        if (' · ' in description[i] and len(description[i]) > 3 ):
+                            filter_1.append(description[i]) #<--- Se extraen el tipo de hospedaje de la descripción.
                         i += 1
                         #---
                         #<--- Se extrae el numero de camas de la descripción.
                     #----
+                    print("Separar duplicados, tamano de la lista de descripciones = ", len(filter_1))
+                    if (len(filter_1) == (len(prices)*2)):
+                        x = 0
+                        while x < (len(filter_1)):
+                            # <--- Se extraen el tipo de hospedaje de la descripción.
+                            temporal_des.append(filter_1[x])
+                            print(filter_1[x])
+                            x += 2
+                    else:
+                        temporal_des = filter_1
+                    #---
                     a = 0
                     #---
                     #last = ''
